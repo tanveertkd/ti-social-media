@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 const NavBar = () => {
     return (
         <div>
-            <nav className="nav-main flex flex-wrap justify-between items-center p-4 border-b-2 text-lg">
+            <nav className="nav-main flex flex-wrap justify-between items-center p-4 border-b-2 text-lg h-18">
                 {/*  Nav left */}
                 <ul className="nav-main-left nav-main-ul hover:cursor-pointer">
                     <li className="nav-main-li nav-section-one">
@@ -22,12 +22,12 @@ const NavBar = () => {
                     <li className="nav-main-li">
                         <label for="nav-main-search" className="nav-item-search">
                             <input
-                                className="nav-item-search-input border-[1px] border-color-grey rounded p-1 w-96"
+                                className="nav-item-search-input border-[1px] border-color-grey rounded w-96 p-1 text-sm relative"
                                 type="text"
                                 placeholder="Looking for someone?"
                                 name="nav-search"
                             />
-                            <i className="far fa-search nav-main-middle-icn hover:cursor-pointer"></i>
+                            <i className="far fa-search nav-main-middle-icn hover:cursor-pointer absolute ml-[-20px] mt-1.5"></i>
                         </label>
                     </li>
                 </ul>
