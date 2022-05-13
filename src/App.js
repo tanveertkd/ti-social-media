@@ -1,15 +1,12 @@
 import "./App.css";
-import logo from "./logo.png";
+import { Landing } from "./pages/";
+import { NavRoutes } from "./routes/Routes";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} alt="mockBee logo" width="180" height="180" />
-        <h1 className="brand-title">
-          Welcome to <span>TI Social!</span>
-        </h1>
-      </header>
+    <div className="App primary-bg w-screen h-screen">
+      {/* <Landing /> */}
+      <NavRoutes />
     </div>
   );
 }
