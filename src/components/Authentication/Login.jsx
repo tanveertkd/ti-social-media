@@ -57,10 +57,11 @@ const Login = () => {
                 </form>
 
                 <Link
-                    to="/signup"
+                    to="/Home"
                     className="btn signup-cta text-color-grey bg-primary-bg p-1.5 border-[1px] border-color-grey rounded hover:bg-color-grey hover:text-primary-bg"
                 >
-                    Sign Up &#8594;
+                    {/* Sign Up &#8594; */}
+                    Go To Home &#8594;
                 </Link>
             </div>
         </div>
