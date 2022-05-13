@@ -1,4 +1,4 @@
-import { NavBar, Post, PostInput, SideBar } from '../../components/';
+import { NavBar, Post, PostInput, SideBar, SideBarRight } from '../../components/';
 
 const Home = () => {
     return (
@@ -19,7 +19,7 @@ const Home = () => {
                     </div>
 
                     <div className="sidebar-container h-full w-[450px] fixed right-0">
-                        <SideBar />
+                        <SideBarRight />
                     </div>
                 </div>
             </div>

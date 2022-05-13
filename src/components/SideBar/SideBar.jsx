@@ -4,19 +4,19 @@ const SideBar = () => {
             <div className="top-section w-80">
                 <ul className="sidebar-ul text-left px-4">
                     <li className="sidebar-list-item p-2 text-xl hover:cursor-pointer">
-                        <i class="far fa-home-alt pr-2"></i> Home
+                        <i class="far fa-home-alt h-6 w-6 mr-2"></i> Home
                     </li>
                     <li className="sidebar-list-item p-2 text-xl hover:cursor-pointer">
-                        <i class="far fa-compass pr-2"></i> Explore
+                        <i class="far fa-compass h-6 w-6 mr-2"></i> Explore
                     </li>
                     <li className="sidebar-list-item p-2 text-xl hover:cursor-pointer">
-                        <i class="far fa-bookmark pr-2"></i> Bookamrks
+                        <i class="far fa-bookmark h-6 w-6 mr-2"></i> Bookamrks
                     </li>
                     <li className="sidebar-list-item p-2 text-xl hover:cursor-pointer">
-                        <i class="far fa-bell pr-2"></i> Notifications
+                        <i class="far fa-bell h-6 w-6 mr-2"></i> Notifications
                     </li>
                     <li className="sidebar-list-item p-2 text-xl hover:cursor-pointer">
-                        <i class="far fa-user-circle pr-2"></i> Profile
+                        <i class="far fa-user-circle h-6 w-6 mr-2"></i> Profile
                     </li>
                 </ul>
             </div>

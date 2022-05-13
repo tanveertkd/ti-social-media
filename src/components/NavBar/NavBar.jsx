@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 const NavBar = () => {
     return (
         <div>
-            <nav className="nav-main flex flex-wrap justify-between items-center p-4 border-b-2 text-lg h-18">
+            <nav className="nav-main flex flex-wrap justify-between items-center p-4 border-b-2 text-lg h-16">
                 {/*  Nav left */}
                 <ul className="nav-main-left nav-main-ul hover:cursor-pointer">
                     <li className="nav-main-li nav-section-one">
