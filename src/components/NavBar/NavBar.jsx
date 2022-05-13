@@ -34,9 +34,9 @@ const NavBar = () => {
 
                 {/* Nav right */}
                 <ul className="nav-main-right nav-main-ul flex hover:cursor-pointer">
-                    <li className="nav-main-li">
+                    <li className="nav-main-li border-[1px] rounded border-color-grey px-2 hover:bg-color-highlight-orange hover:text-primary-bg hover:border-color-highlight-orange hover:shadow hover:shadow-orange-600">
                         <Link to="/" className="nav-main-item nav-btn-login">
-                            Logout
+                            <i className="fal fa-sign-out"></i>
                         </Link>
                     </li>
 

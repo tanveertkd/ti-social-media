@@ -1,10 +1,11 @@
 import { Routes, Route } from "react-router-dom";
-import { Home } from "../pages/"
+import { Landing, Home } from "../pages/"
 
 const NavRoutes = () => {
     return(
         <Routes>
-            <Route path="/home" element={<Home />}/>
+            <Route path="/" element={<Landing />} />
+            <Route path="/home" element={<Home />} />
         </Routes>
     )
 }
