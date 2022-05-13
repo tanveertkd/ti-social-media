@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom"
+
 const Post = () => {
     return (
         <div className="post border-[1px] p-4 border-color-text-lighter-grey rounded my-4 shadow-md">
@@ -22,7 +24,9 @@ const Post = () => {
                     <i class="fal fa-thumbs-up hover:text-color-highlight-orange hover:cursor-pointer"></i>
                 </div>
                 <div>
-                    <i class="fal fa-comments hover:text-color-highlight-orange hover:cursor-pointer"></i>
+                    <Link to="/post">
+                        <i class="fal fa-comments hover:text-color-highlight-orange hover:cursor-pointer"></i>
+                    </Link>
                 </div>
                 <div>
                     <i class="fal fa-share hover:text-color-highlight-orange hover:cursor-pointer"></i>
