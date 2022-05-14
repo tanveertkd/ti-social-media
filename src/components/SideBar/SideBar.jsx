@@ -1,10 +1,14 @@
+import { Link } from 'react-router-dom';
+
 const SideBar = () => {
     return (
         <div className="flex flex-col justify-between w-full items-center">
             <div className="top-section w-80">
                 <ul className="sidebar-ul text-left px-4">
                     <li className="sidebar-list-item p-2 text-xl hover:cursor-pointer">
-                        <i class="far fa-home-alt h-6 w-6 mr-2"></i> Home
+                        <Link to="/home">
+                            <i class="far fa-home-alt h-6 w-6 mr-2"></i> Home
+                        </Link>
                     </li>
                     <li className="sidebar-list-item p-2 text-xl hover:cursor-pointer">
                         <i class="far fa-compass h-6 w-6 mr-2"></i> Explore
@@ -23,11 +27,13 @@ const SideBar = () => {
 
             <div className="bottom-section w-80 flex justify-between mt-20 px-4">
                 <li className="sidebar-list-item p-2 text-xl list-none flex items-center hover:cursor-pointer">
-                    <i class="far fa-user-circle pr-2 text-3xl"></i>
-                    <div className="flex flex-col">
-                        <p>John Doe</p>
-                        <p>@doejohn</p>
-                    </div>
+                    <Link to="/profile" className="flex items-center">
+                        <i class="far fa-user-circle pr-2 text-3xl"></i>
+                        <div className="flex flex-col">
+                            <p>John Doe</p>
+                            <p>@doejohn</p>
+                        </div>
+                    </Link>
                 </li>
                 <li className="sidebar-list-item p-2 text-xl list-none flex items-center hover:cursor-pointer">
                     <i class="far fa-ellipsis-h"></i>
