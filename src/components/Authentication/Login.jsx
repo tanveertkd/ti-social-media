@@ -1,6 +1,22 @@
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { loginHelper } from '../../features/auth/authSlice';
 
 const Login = () => {
+    const [userInput, setUserInput] = useState({
+        username: '',
+        password: '',
+    });
+
+    const dispatch = useDispatch();
+
+    const handlelogin = (e) => {
+        e.preventDefault();
+        // console.log(input);
+        dispatch(loginHelper(userInput));
+    };
+
     return (
         <div className="right login-container border-[1px] border-color-grey rounded w-[500px] h-[600px] p-4 flex flex-col justify-center shadow-xl">
             <div className="login w-full flex flex-col justify-center items-center">
@@ -8,15 +24,18 @@ const Login = () => {
 
                 <form className="login-input-form w-10/12">
                     <div className="form-input my-4 flex flex-col">
-                        <label htmlFor="login-email" className="input-label text-left text-lg">
-                            Email:
+                        <label htmlFor="login-username" className="input-label text-left text-lg">
+                            Username:
                         </label>
                         <input
                             type="text"
-                            placeholder="Enter your email address"
-                            name="login-email"
+                            placeholder="Enter your username"
+                            name="login-username"
                             required
-                            className="login-email input-form border-[1px] border-color-grey rounded p-1"
+                            className="login-username input-form border-[1px] border-color-grey rounded p-1"
+                            onChange={(e) =>
+                                setUserInput({ ...userInput, username: e.target.value })
+                            }
                         />
                     </div>
 
@@ -30,6 +49,9 @@ const Login = () => {
                             name="login-password"
                             required
                             className="login-password input-form border-[1px] border-color-grey rounded p-1"
+                            onChange={(e) => {
+                                setUserInput({ ...userInput, password: e.target.value });
+                            }}
                         />
                     </div>
 
@@ -48,8 +70,8 @@ const Login = () => {
                     </div>
                     <div className="form-submit-btn">
                         <button
-                            type="submit"
                             className="btn form-btn bg-color-grey text-primary-bg w-full p-1.5 border-[1px] border-color-grey rounded my-4 hover:bg-color-hover-grey"
+                            onClick={(e) => handlelogin(e, userInput)}
                         >
                             Sign In
                         </button>
