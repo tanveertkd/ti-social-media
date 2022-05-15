@@ -10,19 +10,22 @@ module.exports = {
                 'color-hover-light-grey': '#dbd7d7',
                 'color-highlight-orange': '#ff3d00',
                 'color-text-lighter-grey': '#bdbdbd',
-            
+
                 /* alert colors */
                 'color-alert-primary': '#2196f3',
                 'color-alert-success': '#43a047',
                 'color-alert-warning': '#ffab00',
                 'color-alert-error': '#ff5252',
-            
+
                 /* extra colors for badges */
                 'color-offline': '#969696',
                 'color-idle': '#ffc400',
             },
         },
         screens: {
+            'xs': '320px',
+            // => @media (min-width: 320px) { ... }
+
             'sm': '640px',
             // => @media (min-width: 640px) { ... }
       

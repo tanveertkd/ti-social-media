@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 
 const SideBar = () => {
     return (
-        <div className="flex flex-col justify-between w-full items-center">
+        <div className="hidden lg:flex flex-col justify-between w-full items-center">
             <div className="top-section w-80">
                 <ul className="sidebar-ul text-left px-4">
                     <li className="sidebar-list-item p-2 text-xl hover:cursor-pointer">
