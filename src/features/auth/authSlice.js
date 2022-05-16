@@ -41,6 +41,7 @@ const authSlice = createSlice({
     initialState,
     reducers: {
         logout: (state) => {
+            localStorage.removeItem('ti_socials_token')
             localStorage.removeItem('ti_socials_user');
             state.token = '';
             state.currentUser = null;

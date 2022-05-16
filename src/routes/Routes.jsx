@@ -17,7 +17,6 @@ const NavRoutes = () => {
             {!token ? (
                 <>
                     <Route path="/" element={<Landing />} />
-                    {/* <Route path='/signup' element={} /> */}
                 </>
             ) : (
                 <>
