@@ -1,6 +1,9 @@
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { logout } from '../../features/auth/authSlice';
 
 const NavBar = () => {
+    const dispatch = useDispatch();
     return (
         <div>
             <nav className="nav-main flex flex-wrap justify-between items-center p-4 border-b-2 text-lg h-16">
@@ -35,22 +38,13 @@ const NavBar = () => {
                 {/* Nav right */}
                 <ul className="nav-main-right nav-main-ul flex hover:cursor-pointer">
                     <li className="nav-main-li border-[1px] rounded border-color-grey px-2 hover:bg-color-highlight-orange hover:text-primary-bg hover:border-color-highlight-orange hover:shadow hover:shadow-orange-600">
-                        <Link to="/" className="nav-main-item nav-btn-login">
+                        <button
+                            onClick={() => dispatch(logout())}
+                            className="nav-main-item nav-btn-login"
+                        >
                             <i className="fal fa-sign-out"></i>
-                        </Link>
+                        </button>
                     </li>
-
-                    {/* <li className="nav-main-li">
-                        {!auth ? (
-                            <Link to="/login" className="nav-main-item nav-btn-login">
-                                Login
-                            </Link>
-                        ) : (
-                            <div className="nav-main-item nav-btn-login" onClick={signOutHandler}>
-                                Logout
-                            </div>
-                        )}
-                    </li> */}
                 </ul>
 
                 {/* {Nav middle mobile} */}
