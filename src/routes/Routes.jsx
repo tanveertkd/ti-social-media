@@ -11,7 +11,7 @@ const NavRoutes = () => {
             <Route element={<PrivateRoutes />}>
                 <Route path="/home" element={<Home />} />
                 <Route path="/post" element={<PostComment />} />
-                <Route path="/profile" element={<Profile />} />
+                <Route path="/profile/:username" element={<Profile />} />
             </Route>
 
             {!token ? (

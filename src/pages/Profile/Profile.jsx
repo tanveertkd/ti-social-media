@@ -1,7 +1,24 @@
-import { Link } from 'react-router-dom';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, useParams } from 'react-router-dom';
 import { NavBar, SideBar, Post, SideBarRight } from '../../components';
+import { getAllUsersHelper, getUsersPost } from '../../features/user/userSlice';
 
 const Profile = () => {
+    const { username } = useParams();
+
+    const { users, userPost } = useSelector((state) => state.users);
+    const usersAll = users?.users;
+    const dispatch = useDispatch();
+
+    const currentUser = usersAll?.find((currUser) => currUser.username === username);
+    // console.log(currentUser);
+
+    useEffect(() => {
+        dispatch(getAllUsersHelper());
+        dispatch(getUsersPost(username));
+    }, [dispatch, username]);
+
     return (
         <div className="flex flex-col h-screen">
             <div className="fixed top-0 right-0 left-0 bg-primary-bg">
@@ -23,8 +40,10 @@ const Profile = () => {
                         </div>
 
                         <div className="py-2">
-                            <p className="text-xl">John Doe</p>
-                            <p className="text-color-hover-grey">@doejohn</p>
+                            <p className="text-xl">
+                                {currentUser?.firstName} {currentUser?.lastName}
+                            </p>
+                            <p className="text-color-hover-grey">@{username}</p>
                         </div>
 
                         <div className="w-full py-2">
@@ -37,23 +56,18 @@ const Profile = () => {
                         </div>
 
                         <div className="py-2">
-                            <p>
-                                Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                                Consectetur officiis dolor deserunt quod voluptatem veniam eaque
-                                rerum tempore vitae minus laudantium corporis consequatur esse,
-                                alias accusamus!
-                            </p>
-                            <Link
-                                to={'https://www.portfolio.com'}
+                            <p>{currentUser?.bio}</p>
+                            <a
+                                href={currentUser?.site}
                                 className="underline text-color-alert-error"
                             >
-                                <i className="fal fa-globe pr-1"></i> portfolio.com
-                            </Link>
+                                <i className="fal fa-globe pr-1"></i> {currentUser?.site}
+                            </a>
                         </div>
 
                         <div className="py-2 flex justify-center border-[1px] rounded">
                             <div className="flex flex-col px-4">
-                                <p>10</p>
+                                <p>{currentUser?.following?.length}</p>
                                 <p>Following</p>
                             </div>
                             <div className="flex flex-col px-4">
@@ -61,16 +75,21 @@ const Profile = () => {
                                 <p>Posts</p>
                             </div>
                             <div className="flex flex-col px-4">
-                                <p>10</p>
+                                <p>{currentUser?.followers?.length}</p>
                                 <p>Folowers</p>
                             </div>
                         </div>
 
                         <div className="posts py-4 text-left">
                             <p className="text-xl">Your Posts</p>
-                            {[1,2,3,4,5,6,7,8,9,10].map(post => <Post />)}
+                            {userPost?.map((post) => (
+                                <Post
+                                    postData={post}
+                                    firstName={currentUser?.firstName}
+                                    lastName={currentUser?.lastName}
+                                />
+                            ))}
                         </div>
-
                     </div>
 
                     <div className="sidebar-container h-full w-[450px] fixed right-0">

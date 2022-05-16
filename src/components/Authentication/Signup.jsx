@@ -90,8 +90,8 @@ const Signup = () => {
                             name="login-username"
                             required
                             className="login-username input-form border-[1px] border-color-grey rounded p-1"
-                            onChange={(e) =>
-                                setUserInput({ ...userInput, username: e.target.value })
+                            onChange={(event) =>
+                                setUserInput({ ...userInput, username: event.target.value })
                             }
                         />
                     </div>

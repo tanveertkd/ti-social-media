@@ -1,6 +1,11 @@
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 const SideBar = () => {
+    const {
+        currentUser: { username, firstName, lastName },
+    } = useSelector((state) => state.auth);
+
     return (
         <div className="hidden lg:flex flex-col justify-between w-full items-center">
             <div className="top-section w-80">
@@ -27,11 +32,13 @@ const SideBar = () => {
 
             <div className="bottom-section w-80 flex justify-between mt-20 px-4">
                 <li className="sidebar-list-item p-2 text-xl list-none flex items-center hover:cursor-pointer">
-                    <Link to="/profile" className="flex items-center">
+                    <Link to={`/profile/${username}`} className="flex items-center">
                         <i class="far fa-user-circle pr-2 text-3xl"></i>
-                        <div className="flex flex-col">
-                            <p>John Doe</p>
-                            <p>@doejohn</p>
+                        <div className="flex flex-col text-left">
+                            <p>
+                                {firstName} {lastName}
+                            </p>
+                            <p>@{username}</p>
                         </div>
                     </Link>
                 </li>

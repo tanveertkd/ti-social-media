@@ -1,11 +1,14 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { loginService, signUpService } from '../../services';
 
+import toast from 'react-hot-toast';
+
 const loginHelper = createAsyncThunk(
     'auth/loginHelper',
     async ({ username, password }, { rejectWithValue }) => {
         try {
             const response = await loginService(username, password);
+            toast.success('Welcome!');
             return response;
         } catch (error) {
             return rejectWithValue(error.response.data);
@@ -18,12 +21,10 @@ const signupHelper = createAsyncThunk(
     async ( userInput , { rejectWithValue }) => {
         console.log('userInput', userInput)
         try {
-            console.log("called")
             const response = await signUpService(userInput);
-            console.log(response);
+            toast.success('Welcome to TI!');
             return response;
         } catch (error) {
-            console.log(error);
             return rejectWithValue(error.response.data);
         }
     },

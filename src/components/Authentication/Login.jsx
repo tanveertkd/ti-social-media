@@ -6,7 +6,7 @@ import { useAuth } from '../../hooks/useAuth';
 
 const Login = () => {
     const { toggleUser } = useAuth();
-    
+
     const [userInput, setUserInput] = useState({
         username: '',
         password: '',
@@ -14,8 +14,8 @@ const Login = () => {
 
     const guestInput = {
         username: 'adarshbalika',
-        password: 'adarshBalika123'
-    }
+        password: 'adarshBalika123',
+    };
 
     const dispatch = useDispatch();
 
@@ -26,8 +26,8 @@ const Login = () => {
 
     const handleGuest = (e) => {
         e.preventDefault();
-        dispatch(loginHelper(guestInput))
-    }
+        dispatch(loginHelper(guestInput));
+    };
 
     return (
         <div className="right login-container border-[1px] border-color-grey rounded w-[500px] h-[600px] p-4 flex flex-col justify-center shadow-xl">
