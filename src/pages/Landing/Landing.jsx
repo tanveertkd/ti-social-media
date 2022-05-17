@@ -1,6 +1,11 @@
 import { Login } from '../../components/Authentication/Login';
 import landing from '../../assets/landing.svg';
+import { useAuth } from '../../hooks/useAuth';
+import { Signup } from '../../components';
+
 const Landing = () => {
+    const { newUser } = useAuth();
+    console.log(newUser);
     return (
         <div className="w-screen h-full">
             <div className="h-full justify-center items-center grid grid-cols-2">
@@ -11,7 +16,8 @@ const Landing = () => {
                     <h1 className="text-3xl m-8">
                         Welcome To TI <span className="text-color-alert-warning">Social!</span>
                     </h1>
-                    <Login />
+                    {!newUser ? <Login /> : <Signup />}
+                    {/* <Login /> */}
                 </div>
             </div>
         </div>
