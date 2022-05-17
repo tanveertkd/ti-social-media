@@ -23,4 +23,6 @@ const getPostByUsername = async (username) => {
     }
 };
 
+// const createNewPostService = async ()
+
 export { getAllPosts, getPostByUsername };

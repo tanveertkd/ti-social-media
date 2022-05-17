@@ -1,11 +1,28 @@
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { followUserHelper, unfollowUserHelper } from '../../features/user/userSlice';
 
 const SideBarRight = () => {
+    const { token } = useSelector((state) => state.auth);
     const { users } = useSelector((state) => state.users);
+    const dispatch = useDispatch();
+
     const {
         currentUser: { username },
     } = useSelector((state) => state.auth);
+
+    const currentUserData = users.find((user) => user.username === username);
     const suggestedUsers = users.filter((user) => user.username !== username);
+
+    // Will use this if I decide to remove users from list after following
+    const filteredSuggestedUsers = users
+        ?.filter((user) => user.username !== currentUserData.username)
+        ?.filter(
+            (user) =>
+                !currentUserData?.following.find(
+                    (followedUser) => followedUser.username === user.username,
+                ),
+        );
+
     return (
         <div className="hidden lg:block lg:w-3/5 lg:mx-auto xl:w-9/12 xl:ml-0 border-[1px] border-color-grey rounded">
             <h3 className="text-xl text-left p-2 w-full bg-color-grey text-primary-bg">
@@ -25,9 +42,44 @@ const SideBarRight = () => {
                                         <p className="text-left">@{user?.username}</p>
                                     </div>
                                 </li>
-                                <li className="sidebar-list-item text-xl list-none flex items-center hover:cursor-pointer">
-                                    <i class="fal fa-user-plus"></i>
-                                </li>
+                                {currentUserData?.following?.find(
+                                    (followedUser) => user.username === followedUser.username,
+                                ) ? (
+                                    <li
+                                        className="sidebar-list-item text-xl list-none flex items-center hover:cursor-pointer"
+                                        onClick={() =>
+                                            dispatch(
+                                                unfollowUserHelper({
+                                                    followUserId: user._id,
+                                                    token,
+                                                }),
+                                            )
+                                        }
+                                    >
+                                        <i className="fal fa-user-minus"></i>
+                                    </li>
+                                ) : (
+                                    <li
+                                        className="sidebar-list-item text-xl list-none flex items-center hover:cursor-pointer"
+                                        onClick={() =>
+                                            dispatch(
+                                                followUserHelper({ followUserId: user._id, token }),
+                                            )
+                                        }
+                                    >
+                                        <i className="fal fa-user-plus"></i>
+                                    </li>
+                                )}
+                                {/* // <li
+                                //     className="sidebar-list-item text-xl list-none flex items-center hover:cursor-pointer"
+                                //     onClick={() =>
+                                //         dispatch(
+                                //             followUserHelper({ followUserId: user._id, token }),
+                                //         )
+                                //     }
+                                // >
+                                //     <i className="fal fa-user-plus"></i>
+                                // </li> */}
                             </div>
                         );
                     })

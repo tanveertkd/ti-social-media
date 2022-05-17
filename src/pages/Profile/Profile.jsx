@@ -77,7 +77,7 @@ const Profile = () => {
                                 <p>Following</p>
                             </div>
                             <div className="flex flex-col px-4">
-                                <p>10</p>
+                                <p>{userPost?.length}</p>
                                 <p>Posts</p>
                             </div>
                             <div className="flex flex-col px-4">
@@ -90,6 +90,7 @@ const Profile = () => {
                             <p className="text-xl">Your Posts</p>
                             {userPost?.map((post) => (
                                 <Post
+                                    key={post?._id}
                                     postData={post}
                                     firstName={currentUser?.firstName}
                                     lastName={currentUser?.lastName}

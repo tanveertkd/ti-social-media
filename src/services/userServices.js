@@ -26,7 +26,6 @@ const getUserService = async (user) => {
 };
 
 const editUserService = async (userData, encodedToken) => {
-    
     try {
         const response = await axios.post(
             '/api/users/edit',
@@ -40,13 +39,53 @@ const editUserService = async (userData, encodedToken) => {
             },
         );
         if (response.status === 200 || response.status === 201) {
-            toast.success("Edit successfull!");
+            toast.success('Edit successfull!');
             return response.data.user;
         }
-        
     } catch (error) {
         console.log("Couldn't edit user.", error);
     }
 };
 
-export { getAllUsersService, getUserService, editUserService };
+const followService = async (followUserId, encodedToken) => {
+    try {
+        const response = await axios.post(
+            `/api/users/follow/${followUserId}`,
+            {},
+            {
+                headers: {
+                    authorization: encodedToken,
+                },
+            },
+        );
+        if (response.status === 200 || response.status === 201) {
+            toast.success('Followed user!');
+            return response.data;
+        }
+    } catch (error) {
+        toast.error("Couldn't follow user.")
+        console.log("Couldn't follow user.", error);
+    }
+};
+
+const unfollowService = async (followUserId, encodedToken) => {
+    try{
+        const response = await axios.post(`/api/users/unfollow/${followUserId}`,
+            {},
+            {
+                headers: {
+                    authorization: encodedToken,
+                }
+            }
+        )
+        if(response.status === 200 || response.status === 201){
+            toast.success('Unfollowed user.');
+            return response.data;
+        }
+    }catch(error){
+        toast.error("Couldn't unfollow user.")
+        console.log("Couldn't unfollow user.", error);
+    }
+}
+
+export { getAllUsersService, getUserService, editUserService, followService, unfollowService };

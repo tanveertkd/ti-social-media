@@ -2,7 +2,8 @@ import { Link } from 'react-router-dom';
 
 const Post = ({ postData, firstName, lastName }) => {
     return (
-        <div className="post border-[1px] p-4 border-color-text-lighter-grey rounded my-4 shadow-md">
+        <div className="post border-[1px] p-4 border-color-text-lighter-grey rounded my-4 shadow-md"
+        key={postData?._id}>
             <li className="list-none flex items-center">
                 <i class="far fa-user-circle pr-2 text-4xl"></i>
                 <div className="flex justify-center items-center">
