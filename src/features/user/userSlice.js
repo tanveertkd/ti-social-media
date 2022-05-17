@@ -1,11 +1,18 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { getAllUsersService, getPostByUsername, getUserService } from '../../services';
+import { compose, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { useSelector } from 'react-redux';
+import {
+    editUserService,
+    getAllUsersService,
+    getPostByUsername,
+    getUserService,
+} from '../../services';
 
 const getAllUsersHelper = createAsyncThunk(
     'users/getAllUsersHelper',
     async (_, { rejectWithValue }) => {
         try {
             const response = await getAllUsersService();
+            console.log('all users', response)
             return response;
         } catch (error) {
             console.log(error);
@@ -23,6 +30,20 @@ const getUserHelper = createAsyncThunk(
             return response;
         } catch (error) {
             console.log('getUserHelper', error);
+            return rejectWithValue(error.response.data);
+        }
+    },
+);
+
+const editUserHelper = createAsyncThunk(
+    'users/editUserHelper',
+    async ({ userInput, token }, { rejectWithValue }) => {
+        try {
+            const response = await editUserService(userInput, token);
+            console.log('users/editUserHelper', response);
+            return response;
+        } catch (error) {
+            console.log('users/editUserHelper', error);
             return rejectWithValue(error.response.data);
         }
     },
@@ -59,6 +80,7 @@ const userSlice = createSlice({
             state.isLoading = true;
         },
         [getAllUsersHelper.fulfilled]: (state, { payload }) => {
+            console.log('data payload', payload);
             state.users = payload;
             state.isLoading = false;
         },
@@ -71,8 +93,26 @@ const userSlice = createSlice({
         [getUsersPost.fulfilled]: (state, { payload }) => {
             state.userPost = payload.posts;
         },
+
+        // Edit user profile
+        [editUserHelper.pending]: (state) => {
+            console.log('editUserHelper pending');
+            state.isLoading = true;
+        },
+        [editUserHelper.fulfilled]: (state, { payload }) => {
+            console.log('editUserHelper fulfilled');
+            state.users = state.users.map((user) =>
+                user.username === payload.username ? payload : user,
+            );
+            state.isLoading = false;
+            state.error = null;
+        },
+        [editUserHelper.rejected]: (state, { payload }) => {
+            console.log('editUserHelper rejected');
+            state.error = payload.data.errors;
+        },
     },
 });
 
-export { getAllUsersHelper, getUsersPost };
+export { getAllUsersHelper, getUsersPost, editUserHelper };
 export const userReducer = userSlice.reducer;

@@ -6,7 +6,7 @@ const getAllUsersService = async () => {
         const response = await axios.get('/api/users');
         // console.log('service', response)
         if (response.status === 200 || response.status === 201) {
-            return response.data;
+            return response.data.users;
         }
     } catch (error) {
         console.log("Couldn't fetch users.", error);
@@ -25,14 +25,27 @@ const getUserService = async (user) => {
     }
 };
 
-const editUserService = async (encodedToken) => {
+const editUserService = async (userData, encodedToken) => {
+    
     try {
-        const response = await axios.post('/api/users/edit', {
-            authorization: encodedToken,
-        });
-        if (response.status === 200 || response.status === 201) return response;
+        const response = await axios.post(
+            '/api/users/edit',
+            {
+                userData,
+            },
+            {
+                headers: {
+                    authorization: encodedToken,
+                },
+            },
+        );
+        if (response.status === 200 || response.status === 201) {
+            console.log(response.data.user)
+            return response.data.user;
+        }
+        
     } catch (error) {
-        console.log("Couldn't edit user.");
+        console.log("Couldn't edit user.", error);
     }
 };
 

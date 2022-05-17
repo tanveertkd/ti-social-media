@@ -10,6 +10,7 @@ module.exports = {
                 'color-hover-light-grey': '#dbd7d7',
                 'color-highlight-orange': '#ff3d00',
                 'color-text-lighter-grey': '#bdbdbd',
+                'color-modal-bg': 'rgba(0, 0, 0, 0.5)',
 
                 /* alert colors */
                 'color-alert-primary': '#2196f3',

@@ -1,23 +1,25 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
-import { NavBar, SideBar, Post, SideBarRight } from '../../components';
+import { NavBar, SideBar, Post, SideBarRight, EditProfileModal } from '../../components';
 import { getAllUsersHelper, getUsersPost } from '../../features/user/userSlice';
 
 const Profile = () => {
     const { username } = useParams();
 
     const { users, userPost } = useSelector((state) => state.users);
-    const usersAll = users?.users;
+    // const usersAll = users?.users;
     const dispatch = useDispatch();
 
-    const currentUser = usersAll?.find((currUser) => currUser.username === username);
+    const currentUser = users?.find((currUser) => currUser.username === username);
     // console.log(currentUser);
 
     useEffect(() => {
         dispatch(getAllUsersHelper());
         dispatch(getUsersPost(username));
     }, [dispatch, username]);
+
+    const [modal, setModal] = useState(false);
 
     return (
         <div className="flex flex-col h-screen">
@@ -47,13 +49,19 @@ const Profile = () => {
                         </div>
 
                         <div className="w-full py-2">
-                            <Link
-                                to="/edit-profile"
+                            <button
+                                onClick={() => setModal(true)}
                                 className="border-[1px] px-10 py-2 rounded bg-color-alert-error hover:bg-color-highlight-orange"
                             >
                                 Edit Profile
-                            </Link>
+                            </button>
                         </div>
+
+                        {modal ? (
+                            <div className="modal-container absolute top-0 right-0 bottom-0 left-0 flex justify-center items-center bg-color-modal-bg z-10">
+                                <EditProfileModal setModal={setModal} />
+                            </div>
+                        ) : null}
 
                         <div className="py-2">
                             <p>{currentUser?.bio}</p>
