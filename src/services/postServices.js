@@ -24,11 +24,11 @@ const getPostByUsername = async (username) => {
     }
 };
 
-const createNewPostService = async (post, encodedToken) => {
+const createNewPostService = async (postData, encodedToken) => {
     try{
         const response = await axios.post('/api/posts',
             {
-                post
+                postData
             },
             {
                 headers: {

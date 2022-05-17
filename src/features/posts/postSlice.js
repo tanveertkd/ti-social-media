@@ -1,11 +1,26 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { getAllPostsService } from '../../services';
+import { createNewPostService, getAllPostsService } from '../../services';
 
 const getAllPostsHelper = createAsyncThunk(
     'posts/getAllPostsHelper',
     async (_, { rejectWithValue }) => {
         try {
             const response = await getAllPostsService();
+            return response;
+        } catch (error) {
+            console.log(error);
+            return rejectWithValue(error.response.data);
+        }
+    },
+);
+
+const createNewPostHelper = createAsyncThunk(
+    'posts/createNewPostHelper',
+    async ({ userInput, token }, { rejectWithValue }) => {
+        console.log('posts/createNewPostHelper', userInput)
+        try {
+            const response = await createNewPostService(userInput, token);
+            console.log(response);
             return response;
         } catch (error) {
             console.log(error);
@@ -25,6 +40,7 @@ const postSlice = createSlice({
     initialState,
     reducers: {},
     extraReducers: {
+        // All posts
         [getAllPostsHelper.pending]: (state) => {
             state.isLoading = true;
         },
@@ -37,8 +53,22 @@ const postSlice = createSlice({
             state.isLoading = false;
             state.error = payload.errors;
         },
+
+        // New Post
+        [createNewPostHelper.pending]: (state) => {
+            state.isLoading = true;
+        },
+        [createNewPostHelper.fulfilled]: (state, { payload }) => {
+            state.isLoading = false;
+            state.posts = payload;
+            state.error = null;
+        },
+        [createNewPostHelper.rejected]: (state, { payload }) => {
+            state.isLoading = false;
+            state.error = payload.errors;
+        },
     },
 });
 
-export { getAllPostsHelper };
+export { getAllPostsHelper, createNewPostHelper };
 export const postReducer = postSlice.reducer;
