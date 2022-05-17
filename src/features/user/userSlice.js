@@ -1,5 +1,4 @@
-import { compose, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { useSelector } from 'react-redux';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import {
     editUserService,
     getAllUsersService,
@@ -12,7 +11,7 @@ const getAllUsersHelper = createAsyncThunk(
     async (_, { rejectWithValue }) => {
         try {
             const response = await getAllUsersService();
-            console.log('all users', response)
+            console.log('all users', response);
             return response;
         } catch (error) {
             console.log(error);
@@ -90,8 +89,15 @@ const userSlice = createSlice({
         },
 
         // User posts
+        [getUsersPost.pending]: (state) => {
+            state.isLoading = true;
+        },
         [getUsersPost.fulfilled]: (state, { payload }) => {
             state.userPost = payload.posts;
+        },
+        [getUsersPost.rejected]: (state, { payload }) => {
+            state.isLoading = false;
+            state.error = payload.errors;
         },
 
         // Edit user profile

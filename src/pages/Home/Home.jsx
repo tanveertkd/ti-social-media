@@ -3,7 +3,7 @@ import { NavBar, Post, PostInput, SideBar, SideBarRight } from '../../components
 const Home = () => {
     return (
         <div className="flex flex-col h-screen">
-            <div className="fixed top-0 right-0 left-0 bg-primary-bg">
+            <div className="fixed top-0 right-0 left-0 bg-primary-bg z-10">
                 <NavBar />
             </div>
             <div className="xs:w-screen xs:mx-auto xs:px-0 w-full h-full flex justify-center p-4 mt-20">
