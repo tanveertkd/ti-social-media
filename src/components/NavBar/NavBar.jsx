@@ -23,7 +23,7 @@ const NavBar = () => {
                 {/* {Nav middle} */}
                 <ul className="nav-main-middle nav-main-ul">
                     <li className="nav-main-li">
-                        <label for="nav-main-search" className="nav-item-search">
+                        <label htmlFor="nav-main-search" className="nav-item-search">
                             <input
                                 className="nav-item-search-input border-[1px] border-color-grey rounded w-96 p-1 text-sm relative"
                                 type="text"
@@ -50,7 +50,7 @@ const NavBar = () => {
                 {/* {Nav middle mobile} */}
                 {/* <ul className="nav-main-ul nav-main-mobile">
                     <li className="nav-main-li">
-                        <label for="nav-main-search" className="nav-item-search">
+                        <label htmlFor="nav-main-search" className="nav-item-search">
                             <input
                                 className="nav-item-search-input"
                                 type="text"

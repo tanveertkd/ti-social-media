@@ -1,5 +1,6 @@
+import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { followUserHelper, unfollowUserHelper } from '../../features/user/userSlice';
+import { followUserHelper, getAllUsersHelper, unfollowUserHelper } from '../../features/user/userSlice';
 
 const SideBarRight = () => {
     const { token } = useSelector((state) => state.auth);
@@ -22,6 +23,10 @@ const SideBarRight = () => {
                     (followedUser) => followedUser.username === user.username,
                 ),
         );
+
+    useEffect(() => {
+        dispatch(dispatch(() => getAllUsersHelper()));
+    },[dispatch])
 
     return (
         <div className="hidden lg:block lg:w-3/5 lg:mx-auto xl:w-9/12 xl:ml-0 border-[1px] border-color-grey rounded">

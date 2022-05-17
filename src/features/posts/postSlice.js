@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { createNewPostService, getAllPostsService } from '../../services';
+import { createNewPostService, getAllPostsService, likePostService, dislikePostService } from '../../services';
 
 const getAllPostsHelper = createAsyncThunk(
     'posts/getAllPostsHelper',
@@ -17,13 +17,35 @@ const getAllPostsHelper = createAsyncThunk(
 const createNewPostHelper = createAsyncThunk(
     'posts/createNewPostHelper',
     async ({ userInput, token }, { rejectWithValue }) => {
-        console.log('posts/createNewPostHelper', userInput)
         try {
             const response = await createNewPostService(userInput, token);
-            console.log(response);
             return response;
         } catch (error) {
-            console.log(error);
+            return rejectWithValue(error.response.data);
+        }
+    },
+);
+
+const likePostHelper = createAsyncThunk(
+    'posts/likePostHelper',
+    async ({ postId, token }, { rejectWithValue }) => {
+        console.log('called')
+        try {
+            const response = await likePostService(postId, token);
+            return response;
+        } catch (error) {
+            return rejectWithValue(error.response.data);
+        }
+    },
+);
+
+const dislikePostHelper = createAsyncThunk(
+    'posts/likePostHelper',
+    async ({ postId, token }, { rejectWithValue }) => {
+        try {
+            const response = await dislikePostService(postId, token);
+            return response;
+        } catch (error) {
             return rejectWithValue(error.response.data);
         }
     },
@@ -67,8 +89,36 @@ const postSlice = createSlice({
             state.isLoading = false;
             state.error = payload.errors;
         },
+
+        // Like posts
+        [likePostHelper.pending]: (state) => {
+            state.isLoading = true;
+        },
+        [likePostHelper.fulfilled]: (state, { payload }) => {
+            state.posts = payload;
+            state.isLoading = false;
+            state.error = null;
+        },
+        [likePostHelper.rejected]: (state, { payload }) => {
+            state.isLoading = false;
+            state.error = payload.errors;
+        },
+
+        // Dislike posts
+        [dislikePostHelper.pending]: (state) => {
+            state.isLoading = true;
+        },
+        [dislikePostHelper.fulfilled]: (state, { payload }) => {
+            state.posts = payload;
+            state.isLoading = false;
+            state.error = null;
+        },
+        [dislikePostHelper.rejected]: (state, { payload }) => {
+            state.isLoading = false;
+            state.error = payload.errors;
+        },
     },
 });
 
-export { getAllPostsHelper, createNewPostHelper };
+export { getAllPostsHelper, createNewPostHelper, likePostHelper, dislikePostHelper };
 export const postReducer = postSlice.reducer;
