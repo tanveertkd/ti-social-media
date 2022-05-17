@@ -12,20 +12,20 @@ const SideBar = () => {
                 <ul className="sidebar-ul text-left px-4">
                     <li className="sidebar-list-item p-2 text-xl hover:cursor-pointer">
                         <Link to="/home">
-                            <i class="far fa-home-alt h-6 w-6 mr-2"></i> Home
+                            <i className="far fa-home-alt h-6 w-6 mr-2"></i> Home
                         </Link>
                     </li>
                     <li className="sidebar-list-item p-2 text-xl hover:cursor-pointer">
-                        <i class="far fa-compass h-6 w-6 mr-2"></i> Explore
+                        <i className="far fa-compass h-6 w-6 mr-2"></i> Explore
                     </li>
                     <li className="sidebar-list-item p-2 text-xl hover:cursor-pointer">
-                        <i class="far fa-bookmark h-6 w-6 mr-2"></i> Bookamrks
+                        <i className="far fa-bookmark h-6 w-6 mr-2"></i> Bookamrks
                     </li>
                     <li className="sidebar-list-item p-2 text-xl hover:cursor-pointer">
-                        <i class="far fa-bell h-6 w-6 mr-2"></i> Notifications
+                        <i className="far fa-bell h-6 w-6 mr-2"></i> Notifications
                     </li>
                     <li className="sidebar-list-item p-2 text-xl hover:cursor-pointer">
-                        <i class="far fa-user-circle h-6 w-6 mr-2"></i> Profile
+                        <i className="far fa-user-circle h-6 w-6 mr-2"></i> Profile
                     </li>
                 </ul>
             </div>
@@ -43,7 +43,7 @@ const SideBar = () => {
                     </Link>
                 </li>
                 <li className="sidebar-list-item p-2 text-xl list-none flex items-center hover:cursor-pointer">
-                    <i class="far fa-ellipsis-h"></i>
+                    <i className="far fa-ellipsis-h"></i>
                 </li>
             </div>
         </div>

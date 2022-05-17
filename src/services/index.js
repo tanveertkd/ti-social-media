@@ -1,3 +1,3 @@
 export { loginService, signUpService } from './authService';
 export { getAllUsersService, getUserService, editUserService, followService, unfollowService } from './userServices';
-export { getAllPosts, getPostByUsername } from './postServices';
+export { getAllPostsService, getPostByUsername, createNewPostService } from './postServices';

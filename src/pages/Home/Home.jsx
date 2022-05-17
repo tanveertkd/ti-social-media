@@ -1,6 +1,16 @@
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { NavBar, Post, PostInput, SideBar, SideBarRight } from '../../components/';
+import { getAllPostsHelper } from '../../features/posts/postSlice';
 
 const Home = () => {
+    const { posts } = useSelector((state) => state.post);
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(getAllPostsHelper());
+    }, [dispatch]);
+
     return (
         <div className="flex flex-col h-screen">
             <div className="fixed top-0 right-0 left-0 bg-primary-bg z-10">
@@ -15,7 +25,9 @@ const Home = () => {
                     <div className="home-main xs:w-full lg:px-12 lg:w-7/12 m-auto">
                         <PostInput />
                         <h3 className="text-xl text-left">Latest Posts</h3>
-                        {[1,2,3,4,5,6,7,8,9,10].map(post => <Post />)}
+                        {posts?.map((post) => (
+                            <Post key={post?._id} postData={post} />
+                        ))}
                     </div>
 
                     <div className="sidebar-container hidden lg:block h-full w-[450px] fixed right-0">

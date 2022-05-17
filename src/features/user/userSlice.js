@@ -115,7 +115,9 @@ const userSlice = createSlice({
             state.isLoading = true;
         },
         [getUsersPost.fulfilled]: (state, { payload }) => {
-            state.userPost = payload.posts;
+            state.userPost = payload;
+            state.isLoading = false;
+            state.error = null;
         },
         [getUsersPost.rejected]: (state, { payload }) => {
             state.isLoading = false;
