@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { NavBar, SideBar, Post, SideBarRight, EditProfileModal } from '../../components';
 import { getAllUsersHelper, getUsersPost } from '../../features/user/userSlice';
 
@@ -8,11 +8,9 @@ const Profile = () => {
     const { username } = useParams();
 
     const { users, userPost } = useSelector((state) => state.users);
-    // const usersAll = users?.users;
     const dispatch = useDispatch();
 
     const currentUser = users?.find((currUser) => currUser.username === username);
-    // console.log(currentUser);
 
     useEffect(() => {
         dispatch(getAllUsersHelper());
@@ -59,7 +57,7 @@ const Profile = () => {
 
                         {modal ? (
                             <div className="modal-container absolute top-0 right-0 bottom-0 left-0 flex justify-center items-center bg-color-modal-bg z-10">
-                                <EditProfileModal setModal={setModal} />
+                                <EditProfileModal setModal={setModal} currentUser={currentUser}/>
                             </div>
                         ) : null}
 

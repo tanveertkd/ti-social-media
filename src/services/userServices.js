@@ -40,7 +40,7 @@ const editUserService = async (userData, encodedToken) => {
             },
         );
         if (response.status === 200 || response.status === 201) {
-            console.log(response.data.user)
+            toast.success("Edit successfull!");
             return response.data.user;
         }
         

@@ -2,22 +2,21 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { editUserHelper } from '../../features/user/userSlice';
 
-const EditProfileModal = ({ setModal }) => {
+const EditProfileModal = ({ setModal, currentUser }) => {
     const dispatch = useDispatch();
     const { token } = useSelector((state) => state.auth);
-    const { users } = useSelector((state) => state.users);
-    // console.log(users)
-
+    const { firstName, lastName, email, bio, site } = currentUser;
     const [userInput, setUserInput] = useState({
-        firstName: '',
-        lastName: '',
+        firstName: firstName,
+        lastName: lastName,
         email: '',
-        bio: '',
-        site: '',
+        bio: bio,
+        site: site,
     });
 
-    const signUpHandler = (e, userInput) => {
+    const editHandler = (e, userInput) => {
         e.preventDefault();
+        setModal(false);
         dispatch(editUserHelper({ userInput, token }));
     };
     return (
@@ -29,7 +28,7 @@ const EditProfileModal = ({ setModal }) => {
             <p className="text-xl w-10/12 my-4">Edit your profile</p>
             <form
                 className="login-input-form w-10/12"
-                onSubmit={(event) => signUpHandler(event, userInput)}
+                onSubmit={(event) => editHandler(event, userInput)}
             >
                 <div className="form-input my-4 flex flex-col">
                     <label for="login-firstName" className="input-label text-left text-base">
@@ -42,6 +41,7 @@ const EditProfileModal = ({ setModal }) => {
                         placeholder="Enter your first name"
                         name="login-firstName"
                         className="login-firstName input-form border-[1px] border-color-grey rounded p-[2px]"
+                        value={userInput.firstName === '' ? firstName : userInput.firstName}
                         onChange={(event) =>
                             setUserInput({
                                 ...userInput,
@@ -62,6 +62,7 @@ const EditProfileModal = ({ setModal }) => {
                         placeholder="Enter your last name"
                         name="login-lastName"
                         className="login-lastName input-form border-[1px] border-color-grey rounded p-[2px]"
+                        value={userInput.lastName === '' ? lastName : userInput.lastName}
                         onChange={(event) =>
                             setUserInput({
                                 ...userInput,
@@ -82,6 +83,7 @@ const EditProfileModal = ({ setModal }) => {
                         placeholder="Enter your email address"
                         name="login-email"
                         className="login-email input-form border-[1px] border-color-grey rounded p-[2px]"
+                        value={userInput.email === '' ? email : userInput.email}
                         onChange={(event) =>
                             setUserInput({
                                 ...userInput,
@@ -102,6 +104,7 @@ const EditProfileModal = ({ setModal }) => {
                         placeholder="Edit your bio"
                         name="login-email"
                         className="login-email input-form border-[1px] border-color-grey rounded p-[2px]"
+                        value={userInput.bio === '' ? bio : userInput.bio}
                         onChange={(event) =>
                             setUserInput({
                                 ...userInput,
@@ -122,6 +125,7 @@ const EditProfileModal = ({ setModal }) => {
                         placeholder="Edit your portfolio/website link"
                         name="login-email"
                         className="login-email input-form border-[1px] border-color-grey rounded p-[2px]"
+                        value={userInput.site === '' ? site : userInput.site}
                         onChange={(event) =>
                             setUserInput({
                                 ...userInput,
