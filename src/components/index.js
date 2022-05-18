@@ -6,3 +6,4 @@ export { PostInput } from './PostInput/PostInput';
 export { Post } from './Post/Post'
 export { EditProfileModal } from './EditProfileModal/EditProfileModal';
 export { OverflowMenu } from './OverflowMenu/OverflowMenu';
+export { EditPostModal } from './EditPostModal/EditPostModal';

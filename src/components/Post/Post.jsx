@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { dislikePostHelper, likePostHelper } from '../../features/posts/postSlice';
+import { EditPostModal } from '../EditPostModal/EditPostModal';
 import { OverflowMenu } from '../OverflowMenu/OverflowMenu';
 
 const Post = ({ postData }) => {
@@ -20,12 +21,17 @@ const Post = ({ postData }) => {
     const isPostAuthor = (post) => post.username === currentUser.username;
 
     const [postOverflowMenu, setPostOverflowMenu] = useState(false);
-
+    const [editModal, setEditModal] = useState(false);
     return (
         <div
             className="post border-[1px] p-4 border-color-text-lighter-grey rounded my-4 shadow-md"
             key={postData?._id}
         >
+            {editModal ? (
+                <div className="edit-modal-container absolute top-0 right-0 bottom-0 left-0 z-10 w-full flex justify-center items-center bg-color-modal-bg">
+                    <EditPostModal postData={postData} setEditModal={setEditModal} token={token} />
+                </div>
+            ) : null}
             <div className="list-none flex items-center justify-between">
                 <div className="flex">
                     <i className="far fa-user-circle pr-2 text-4xl"></i>
@@ -53,6 +59,7 @@ const Post = ({ postData }) => {
                             postUser={postData?.username}
                             token={token}
                             userData={currentUser?.username}
+                            setEditModal={setEditModal}
                         />
                     ) : null}
                 </div>

@@ -37,9 +37,10 @@ const createNewPostHelper = createAsyncThunk(
 
 const editPostHelper = createAsyncThunk(
     'posts/editPostHelper',
-    async ({ postId, postData, token }, { rejectWithValue }) => {
+    async ({ postId, postContent, token }, { rejectWithValue }) => {
+        console.log('data', postContent)
         try {
-            const response = await editPostService(postId, postData, token);
+            const response = await editPostService(postId, postContent, token);
             return response;
         } catch (error) {
             return rejectWithValue(error.response.data);
