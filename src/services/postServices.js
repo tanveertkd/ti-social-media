@@ -129,6 +129,65 @@ const dislikePostService = async (postId, encodedToken) => {
     }
 };
 
+const bookmarkPostService = async (postId, encodedToken) => {
+    try {
+        const response = await axios.post(
+            `/api/users/bookmark/${postId}`,
+            {},
+            {
+                headers: {
+                    authorization: encodedToken,
+                },
+            },
+        );
+        if (response.status === 200 || response.status === 201) {
+            toast.success('Added to bookmarks.')
+            return response.data.bookmarks;
+        }
+    } catch (error) {
+        toast.error("Couldn't add to bookmarks.");
+        console.log(error);
+    }
+};
+
+const removeBookmarkService = async (postId, encodedToken) => {
+    try {
+        const response = await axios.post(
+            `/api/users/remove-bookmark/${postId}`,
+            {},
+            {
+                headers: {
+                    authorization: encodedToken,
+                },
+            },
+        );
+        if (response.status === 200 || response.status === 201) {
+            toast.success('Removed bookmark.')
+            return response.data.bookmarks;
+        }
+    } catch (error) {
+        toast.error("Couldn't remove bookmark.");
+        console.log(error);
+    }
+};
+
+const getAllBookmarksService = async (encodedToken) => {
+    try {
+        const response = await axios.get('/api/users/bookmark/', {
+            headers: {
+                authorization: encodedToken,
+            },
+        });
+        if (response.status === 200 || response.status === 201) {
+            console.log('service log', response);
+            return response.data.bookmarks;
+        }
+    } catch (error) {
+        toast.error("Couldn't get bookmarks.");
+        console.log(error);
+    }
+};
+
 const getPostCommentsService = async (postId) => {
     try {
         const response = await axios.get(`/api/comments/${postId}`);
@@ -173,6 +232,9 @@ export {
     deletePostService,
     likePostService,
     dislikePostService,
+    bookmarkPostService,
+    removeBookmarkService,
+    getAllBookmarksService,
     getPostCommentsService,
     addCommentService,
 };

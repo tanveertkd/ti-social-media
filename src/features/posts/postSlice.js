@@ -9,6 +9,11 @@ import {
     editPostService,
     deletePostService,
 } from '../../services';
+import {
+    bookmarkPostService,
+    getAllBookmarksService,
+    removeBookmarkService,
+} from '../../services/postServices';
 
 const getAllPostsHelper = createAsyncThunk(
     'posts/getAllPostsHelper',
@@ -38,7 +43,7 @@ const createNewPostHelper = createAsyncThunk(
 const editPostHelper = createAsyncThunk(
     'posts/editPostHelper',
     async ({ postId, postContent, token }, { rejectWithValue }) => {
-        console.log('data', postContent)
+        console.log('data', postContent);
         try {
             const response = await editPostService(postId, postContent, token);
             return response;
@@ -50,16 +55,16 @@ const editPostHelper = createAsyncThunk(
 
 const deletePostHelper = createAsyncThunk(
     'posts/deletePostHelper',
-    async({postId, token}, {rejectWithValue}) => {
-        try{
+    async ({ postId, token }, { rejectWithValue }) => {
+        try {
             const response = await deletePostService(postId, token);
             return response;
-        }catch(error){
-            console.log(error)
+        } catch (error) {
+            console.log(error);
             return rejectWithValue(error.response.data);
         }
-    }
-)
+    },
+);
 
 const likePostHelper = createAsyncThunk(
     'posts/likePostHelper',
@@ -110,8 +115,46 @@ const addCommentsHelper = createAsyncThunk(
     },
 );
 
+const getAllBookmarksHelper = createAsyncThunk(
+    'posts/getAllBookmarksHelper',
+    async ({ token }, { rejectWithValue }) => {
+        try {
+            const response = await getAllBookmarksService(token);
+            console.log('helper', response);
+            return response;
+        } catch (error) {
+            return rejectWithValue(error.response.data);
+        }
+    },
+);
+
+const addBookmarkHelper = createAsyncThunk(
+    'posts/addBookmarkHelper',
+    async ({ postId, token }, { rejectWithValue }) => {
+        try {
+            const response = await bookmarkPostService(postId, token);
+            return response;
+        } catch (error) {
+            return rejectWithValue(error.response.data);
+        }
+    },
+);
+
+const removeBookmarkHelper = createAsyncThunk(
+    'posts/removeBookmarkHelper',
+    async ({ postId, token }, { rejectWithValue }) => {
+        try {
+            const response = await removeBookmarkService(postId, token);
+            return response;
+        } catch (error) {
+            return rejectWithValue(error.response.data);
+        }
+    },
+);
+
 const initialState = {
     posts: [],
+    bookmarkedPosts: [],
     isLoading: false,
     error: null,
 };
@@ -218,6 +261,45 @@ const postSlice = createSlice({
             state.isLoading = false;
             state.error = payload;
         },
+
+        // Bookmarks
+        [getAllBookmarksHelper.pending]: (state) => {
+            state.isLoading = true;
+        },
+        [getAllBookmarksHelper.fulfilled]: (state, { payload }) => {
+            state.bookmarkedPosts = payload;
+            state.isLoading = false;
+            state.error = null;
+        },
+        [getAllBookmarksHelper.rejected]: (state, { payload }) => {
+            state.isLoading = false;
+            state.error = payload;
+        },
+        [addBookmarkHelper.pending]: (state) => {
+            state.isLoading = true;
+        },
+        [addBookmarkHelper.fulfilled]: (state, { payload }) => {
+            state.bookmarkedPosts = payload;
+            state.isLoading = false;
+            state.error = null;
+        },
+        [addBookmarkHelper.rejected]: (state, { payload }) => {
+            state.isLoading = false;
+            state.error = payload;
+        },
+        // Remove Bookmark
+        [removeBookmarkHelper.pending]: (state) => {
+            state.isLoading = true;
+        },
+        [removeBookmarkHelper.fulfilled]: (state, { payload }) => {
+            state.bookmarkedPosts = payload;
+            state.isLoading = false;
+            state.error = null;
+        },
+        [removeBookmarkHelper.rejected]: (state, { payload }) => {
+            state.isLoading = false;
+            state.error = payload;
+        },
     },
 });
 
@@ -229,5 +311,8 @@ export {
     likePostHelper,
     dislikePostHelper,
     addCommentsHelper,
+    getAllBookmarksHelper,
+    addBookmarkHelper,
+    removeBookmarkHelper,
 };
 export const postReducer = postSlice.reducer;

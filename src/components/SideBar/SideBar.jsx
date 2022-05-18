@@ -19,7 +19,9 @@ const SideBar = () => {
                         <i className="far fa-compass h-6 w-6 mr-2"></i> Explore
                     </li>
                     <li className="sidebar-list-item p-2 text-xl hover:cursor-pointer">
-                        <i className="far fa-bookmark h-6 w-6 mr-2"></i> Bookamrks
+                        <Link to="/bookmarks">
+                            <i className="far fa-bookmark h-6 w-6 mr-2"></i> Bookamrks
+                        </Link>
                     </li>
                     <li className="sidebar-list-item p-2 text-xl hover:cursor-pointer">
                         <i className="far fa-bell h-6 w-6 mr-2"></i> Notifications

@@ -1,14 +1,20 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { dislikePostHelper, likePostHelper } from '../../features/posts/postSlice';
+import {
+    dislikePostHelper,
+    likePostHelper,
+    addBookmarkHelper,
+    removeBookmarkHelper,
+} from '../../features/posts/postSlice';
 import { EditPostModal } from '../EditPostModal/EditPostModal';
 import { OverflowMenu } from '../OverflowMenu/OverflowMenu';
 
 const Post = ({ postData }) => {
     const { token, currentUser } = useSelector((state) => state.auth);
     const { users } = useSelector((state) => state.users);
-    const { posts } = useSelector((state) => state.post);
+    const { posts, bookmarkedPosts } = useSelector((state) => state.post);
+
     const dispatch = useDispatch();
 
     const currentLoggedUser = users?.find((currUser) => currUser?.username === postData?.username);
@@ -19,6 +25,7 @@ const Post = ({ postData }) => {
     };
 
     const isPostAuthor = (post) => post.username === currentUser.username;
+    const isPostBookmarked = (bookmarks, postId) => bookmarks.find((bookmark) => bookmark?._id === postId);
 
     const [postOverflowMenu, setPostOverflowMenu] = useState(false);
     const [editModal, setEditModal] = useState(false);
@@ -95,7 +102,21 @@ const Post = ({ postData }) => {
                     <i className="fal fa-share hover:text-color-highlight-orange hover:cursor-pointer"></i>
                 </div>
                 <div>
-                    <i className="fal fa-bookmark hover:text-color-highlight-orange hover:cursor-pointer"></i>
+                    {!isPostBookmarked(bookmarkedPosts, postData?._id) ? (
+                        <i
+                            className="fal fa-bookmark hover:text-color-highlight-orange hover:cursor-pointer"
+                            onClick={() =>
+                                dispatch(addBookmarkHelper({ postId: postData?._id, token }))
+                            }
+                        ></i>
+                    ) : (
+                        <i
+                            className="fas fa-bookmark hover:text-color-highlight-orange hover:cursor-pointer"
+                            onClick={() =>
+                                dispatch(removeBookmarkHelper({ postId: postData?._id, token }))
+                            }
+                        ></i>
+                    )}
                 </div>
             </li>
         </div>

@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
 import { Routes, Route, Navigate } from 'react-router-dom';
-import { Landing, Home, PostComment, Profile } from '../pages/';
+import { Landing, Home, PostComment, Profile, Bookmarks } from '../pages/';
 import { PrivateRoutes } from './PrivateRoutes';
 
 const NavRoutes = () => {
@@ -22,6 +22,7 @@ const NavRoutes = () => {
                 <>
                     <Route path="/" element={<Navigate to="/home" />} />
                     <Route path="/post/:postId" element={<PostComment />} />
+                    <Route path='/bookmarks' element={<Bookmarks />} />
                 </>
             )}
         </Routes>
