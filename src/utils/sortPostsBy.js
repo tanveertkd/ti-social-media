@@ -8,5 +8,6 @@ const sortPostsBy = (posts, sortBy) => {
     if (sortBy === 'Oldest') {
         return [...posts].sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
     }
+    return posts;
 };
 export { sortPostsBy };

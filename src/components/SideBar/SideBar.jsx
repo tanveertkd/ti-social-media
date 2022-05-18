@@ -6,6 +6,9 @@ const SideBar = () => {
         currentUser: { username, firstName, lastName },
     } = useSelector((state) => state.auth);
 
+    const { users } = useSelector((state) => state.users);
+    const currentUser = users?.find((currUser) => currUser.username === username);
+
     return (
         <div className="hidden lg:flex flex-col justify-between w-full items-center">
             <div className="top-section w-80">
@@ -29,7 +32,9 @@ const SideBar = () => {
                         <i className="far fa-bell h-6 w-6 mr-2"></i> Notifications
                     </li>
                     <li className="sidebar-list-item p-2 text-xl hover:cursor-pointer">
-                        <i className="far fa-user-circle h-6 w-6 mr-2"></i> Profile
+                        <Link to={`/profile/${username}`}>
+                            <i className="far fa-user-circle h-6 w-6 mr-2"></i> Profile
+                        </Link>
                     </li>
                 </ul>
             </div>
@@ -37,7 +42,13 @@ const SideBar = () => {
             <div className="bottom-section w-80 flex justify-between mt-20 px-4">
                 <li className="sidebar-list-item p-2 text-xl list-none flex items-center hover:cursor-pointer">
                     <Link to={`/profile/${username}`} className="flex items-center">
-                        <i className="far fa-user-circle pr-2 text-3xl"></i>
+                        <div className="w-[48px] mr-2">
+                            <img
+                                src={currentUser?.avatarUrl}
+                                alt={currentUser?.username}
+                                className="rounded-full border-[2px] border-color-alert-success"
+                            />
+                        </div>
                         <div className="flex flex-col text-left">
                             <p>
                                 {firstName} {lastName}

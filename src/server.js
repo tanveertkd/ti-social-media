@@ -116,6 +116,9 @@ export function makeServer({ environment = "development" } = {}) {
         "/users/unfollow/:followUserId/",
         unfollowUserHandler.bind(this)
       );
+
+      //Cloudinary link
+      this.passthrough("https://api.cloudinary.com/v1_1/ddroedz3j/image/upload");
     },
   });
 }

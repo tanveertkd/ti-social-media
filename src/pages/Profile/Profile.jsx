@@ -11,14 +11,12 @@ const Profile = () => {
     const dispatch = useDispatch();
 
     const currentUser = users?.find((currUser) => currUser.username === username);
-
+    const [modal, setModal] = useState(false);
     useEffect(() => {
         dispatch(getAllUsersHelper());
         dispatch(getUsersPost(username));
     }, [dispatch, username]);
-
-    const [modal, setModal] = useState(false);
-
+    
     return (
         <div className="flex flex-col h-screen">
             <div className="fixed top-0 right-0 left-0 bg-primary-bg">
@@ -33,9 +31,9 @@ const Profile = () => {
                     <div className="profile-main px-12 w-7/12 mx-auto">
                         <div className="flex justify-center">
                             <img
-                                src={'https://i.pravatar.cc/200'}
+                                src={currentUser?.avatarUrl}
                                 alt="profile-avatar"
-                                className="rounded-full"
+                                className="rounded-full w-[200px]"
                             />
                         </div>
 
@@ -57,7 +55,7 @@ const Profile = () => {
 
                         {modal ? (
                             <div className="modal-container absolute top-0 right-0 bottom-0 left-0 flex justify-center items-center bg-color-modal-bg z-10">
-                                <EditProfileModal setModal={setModal} currentUser={currentUser}/>
+                                <EditProfileModal setModal={setModal} currentUser={currentUser} />
                             </div>
                         ) : null}
 

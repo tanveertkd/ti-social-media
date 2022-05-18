@@ -7,19 +7,28 @@ const SortOverflowMenu = ({ setSortOverflow }) => {
         <div className="sort-overflow-menu select-none bg-color-grey text-primary-bg border-[1px] w-max list-none text-left">
             <li
                 className="p-2 hover:cursor-pointer hover:bg-neutral-600"
-                onClick={() => dispatch(setSortBy('Trending'))}
+                onClick={() => {
+                    dispatch(setSortBy('Trending'));
+                    setSortOverflow(false);
+                }}
             >
                 Trending
             </li>
             <li
                 className="p-2 hover:cursor-pointer hover:bg-neutral-600"
-                onClick={() => dispatch(setSortBy('Latest'))}
+                onClick={() => {
+                    dispatch(setSortBy('Latest'));
+                    setSortOverflow(false);
+                }}
             >
                 Latest
             </li>
             <li
                 className="p-2 hover:cursor-pointer hover:bg-neutral-600"
-                onClick={() => dispatch(setSortBy('Oldest'))}
+                onClick={() => {
+                    dispatch(setSortBy('Oldest'));
+                    setSortOverflow(false);
+                }}
             >
                 Oldest
             </li>
