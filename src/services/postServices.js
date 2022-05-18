@@ -47,6 +47,46 @@ const createNewPostService = async (postData, encodedToken) => {
     }
 };
 
+const editPostService = async (postId, postData, encodedToken) => {
+    try {
+        const response = await axios.post(
+            `/api/posts/edit/${postId}`,
+            {
+                postData,
+            },
+            {
+                headers: {
+                    authorization: encodedToken,
+                },
+            },
+        );
+        if (response.status === 200 || response.status === 201) {
+            toast.success('Post edited.');
+            return response.data.posts;
+        }
+    } catch (error) {
+        toast.error("Couldn't edit post.");
+        console.log(error.response.data);
+    }
+};
+
+const deletePostService = async (postId, encodedToken) => {
+    try {
+        const response = await axios.delete(`/api/posts/${postId}`, {
+            headers: {
+                authorization: encodedToken,
+            },
+        });
+        if (response.status === 200 || response.status === 201) {
+            toast.success('Post deleted.');
+            return response.data.posts;
+        }
+    } catch (error) {
+        toast.error("Couldn't delete post.");
+        console.log(error);
+    }
+};
+
 const likePostService = async (postId, encodedToken) => {
     try {
         const response = await axios.post(
@@ -90,46 +130,49 @@ const dislikePostService = async (postId, encodedToken) => {
 };
 
 const getPostCommentsService = async (postId) => {
-    try{
+    try {
         const response = await axios.get(`/api/comments/${postId}`);
         console.log(response);
-        if(response.status === 200 || response.status === 201){
+        if (response.status === 200 || response.status === 201) {
             return response.data.comments;
         }
-    }catch(error){
+    } catch (error) {
         toast.error('Failed to load comments.');
-        console.log("Failed to fetch comments", error);
+        console.log('Failed to fetch comments', error);
     }
-}
+};
 
 const addCommentService = async (postId, commentData, encodedToken) => {
-    try{
-        const response = await axios.post(`/api/comments/add/${postId}`, 
+    try {
+        const response = await axios.post(
+            `/api/comments/add/${postId}`,
             {
-                commentData
+                commentData,
             },
             {
                 headers: {
-                    authorization: encodedToken
-                }
-            }
-        )
-        if(response.status === 200 || response.status === 201){
-            toast.success('Added comment!')
+                    authorization: encodedToken,
+                },
+            },
+        );
+        if (response.status === 200 || response.status === 201) {
+            toast.success('Added comment!');
             return response.data.posts;
         }
-    }catch(error) {
+    } catch (error) {
         toast.error('Failed to add comment.');
-        console.log("Failed to add comment", error);
+        console.log('Failed to add comment', error);
     }
-}
+};
 
 export {
     getAllPostsService,
     getPostByUsername,
     createNewPostService,
+    editPostService,
+    deletePostService,
     likePostService,
     dislikePostService,
     getPostCommentsService,
-    addCommentService
+    addCommentService,
 };

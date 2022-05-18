@@ -70,7 +70,7 @@ const PostComment = () => {
                                 <li className="list-none flex items-center">
                                     <i className="far fa-user-circle pr-2 text-4xl"></i>
                                     <div className="flex justify-center items-center">
-                                        <p className="text-lg">Test</p>
+                                        <p className="text-lg">{comment?.firstName} {comment?.lastName}</p>
                                         <p className="text-sm px-2">@{comment?.username}</p>
                                         <p className="separator pr-2">•</p>
                                         <p className="text-sm">

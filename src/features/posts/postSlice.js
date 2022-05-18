@@ -6,6 +6,8 @@ import {
     dislikePostService,
     getPostCommentsService,
     addCommentService,
+    editPostService,
+    deletePostService,
 } from '../../services';
 
 const getAllPostsHelper = createAsyncThunk(
@@ -32,6 +34,31 @@ const createNewPostHelper = createAsyncThunk(
         }
     },
 );
+
+const editPostHelper = createAsyncThunk(
+    'posts/editPostHelper',
+    async ({ postId, postData, token }, { rejectWithValue }) => {
+        try {
+            const response = await editPostService(postId, postData, token);
+            return response;
+        } catch (error) {
+            return rejectWithValue(error.response.data);
+        }
+    },
+);
+
+const deletePostHelper = createAsyncThunk(
+    'posts/deletePostHelper',
+    async({postId, token}, {rejectWithValue}) => {
+        try{
+            const response = await deletePostService(postId, token);
+            return response;
+        }catch(error){
+            console.log(error)
+            return rejectWithValue(error.response.data);
+        }
+    }
+)
 
 const likePostHelper = createAsyncThunk(
     'posts/likePostHelper',
@@ -121,6 +148,34 @@ const postSlice = createSlice({
             state.error = payload.errors;
         },
 
+        // Edit post
+        [editPostHelper.pending]: (state) => {
+            state.isLoading = true;
+        },
+        [editPostHelper.fulfilled]: (state, { payload }) => {
+            state.posts = payload;
+            state.isLoading = false;
+            state.error = null;
+        },
+        [editPostHelper.rejected]: (state, { payload }) => {
+            state.isLoading = false;
+            state.error = payload.errors;
+        },
+
+        // Delete post
+        [deletePostHelper.pending]: (state) => {
+            state.isLoading = true;
+        },
+        [deletePostHelper.fulfilled]: (state, { payload }) => {
+            state.posts = payload;
+            state.isLoading = false;
+            state.error = null;
+        },
+        [deletePostHelper.rejected]: (state, { payload }) => {
+            state.isLoading = false;
+            state.error = payload.errors;
+        },
+
         // Like posts
         [likePostHelper.pending]: (state) => {
             state.isLoading = true;
@@ -165,5 +220,13 @@ const postSlice = createSlice({
     },
 });
 
-export { getAllPostsHelper, createNewPostHelper, likePostHelper, dislikePostHelper, addCommentsHelper };
+export {
+    getAllPostsHelper,
+    createNewPostHelper,
+    editPostHelper,
+    deletePostHelper,
+    likePostHelper,
+    dislikePostHelper,
+    addCommentsHelper,
+};
 export const postReducer = postSlice.reducer;

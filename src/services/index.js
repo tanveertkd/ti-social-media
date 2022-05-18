@@ -10,6 +10,8 @@ export {
     getAllPostsService,
     getPostByUsername,
     createNewPostService,
+    editPostService,
+    deletePostService,
     likePostService,
     dislikePostService,
     getPostCommentsService,
