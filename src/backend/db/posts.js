@@ -17,7 +17,7 @@ export const posts = [
             dislikedBy: [],
         },
         username: 'adarshbalika',
-        createdAt: formatDate(),
+        createdAt: '2022-01-01',
         updatedAt: formatDate(),
         comments: [
             {
@@ -54,7 +54,7 @@ export const posts = [
             dislikedBy: [],
         },
         username: 'adarshbalika',
-        createdAt: formatDate(),
+        createdAt: '2022-01-03',
         updatedAt: formatDate(),
         comments: [
             {
@@ -136,7 +136,7 @@ export const posts = [
                 },
             },
         ],
-        createdAt: formatDate(),
+        createdAt: '2022-02-04',
         updatedAt: formatDate(),
     },
     {
@@ -174,7 +174,7 @@ export const posts = [
                 },
             },
         ],
-        createdAt: formatDate(),
+        createdAt: '2022-01-02',
         updatedAt: formatDate(),
     },
     {
@@ -212,7 +212,7 @@ export const posts = [
                 },
             },
         ],
-        createdAt: formatDate(),
+        createdAt: '2022-03-03',
         updatedAt: formatDate(),
     },
     {
@@ -250,7 +250,7 @@ export const posts = [
                 },
             },
         ],
-        createdAt: formatDate(),
+        createdAt: '2022-01-11',
         updatedAt: formatDate(),
     },
 ];

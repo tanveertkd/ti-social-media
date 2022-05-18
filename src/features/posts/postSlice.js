@@ -157,12 +157,17 @@ const initialState = {
     bookmarkedPosts: [],
     isLoading: false,
     error: null,
+    sortBy: 'Latest',
 };
 
 const postSlice = createSlice({
     name: 'post',
     initialState,
-    reducers: {},
+    reducers: {
+        setSortBy: (state, { payload }) => {
+            state.sortBy = payload;
+        },
+    },
     extraReducers: {
         // All posts
         [getAllPostsHelper.pending]: (state) => {
@@ -315,4 +320,6 @@ export {
     addBookmarkHelper,
     removeBookmarkHelper,
 };
+
+export const { setSortBy } = postSlice.actions;
 export const postReducer = postSlice.reducer;

@@ -11,6 +11,7 @@ const EditPostModal = ({ postData, setEditModal, token }) => {
     const handleEditSubmission = (e, postContent) => {
         e.preventDefault();
         dispatch(editPostHelper({ postId: postData?._id, postContent, token }));
+        setEditModal(false);
     };
 
     return (

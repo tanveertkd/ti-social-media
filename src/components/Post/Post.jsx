@@ -54,7 +54,7 @@ const Post = ({ postData }) => {
                     </div>
                 </div>
                 <div
-                    className="hover:bg-color-text-lighter-grey px-2 rounded-full hover:cursor-pointer relative"
+                    className="hover:bg-slate-200 px-2 rounded-full hover:cursor-pointer relative"
                     onClick={() => setPostOverflowMenu((menuState) => !menuState)}
                 >
                     <i className="far fa-ellipsis-v hover:cursor-pointer p-2"></i>

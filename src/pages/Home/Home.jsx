@@ -1,12 +1,36 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { NavBar, Post, PostInput, SideBar, SideBarRight } from '../../components/';
+import {
+    NavBar,
+    Post,
+    PostInput,
+    SideBar,
+    SideBarRight,
+    SortOverflowMenu,
+} from '../../components/';
 import { getAllPostsHelper } from '../../features/posts/postSlice';
+import { sortPostsBy } from '../../utils/sortPostsBy';
 
 const Home = () => {
-    const { posts } = useSelector((state) => state.post);
+    const {
+        post: { posts, sortBy },
+        auth: { currentUser },
+        users: { users },
+    } = useSelector((state) => state);
+
     const dispatch = useDispatch();
+
+    const userLoggedIn = users?.find((user) => user.username === currentUser.username);
+
+    const userfollowingPosts = posts?.filter((post) =>
+        userLoggedIn?.following?.find(
+            (user) => user?.username === post.username || currentUser.username === post.username,
+        ),
+    );
     
+    const sortedPosts = sortPostsBy(userfollowingPosts, sortBy)
+    const [sortOverflowMenu, setSortOverflowMenu] = useState(false);
+
     useEffect(() => {
         dispatch(getAllPostsHelper());
     }, [dispatch]);
@@ -24,10 +48,21 @@ const Home = () => {
 
                     <div className="home-main xs:w-full lg:px-12 lg:w-7/12 m-auto">
                         <PostInput />
-                        <h3 className="text-xl text-left">Latest Posts</h3>
-                        {posts?.map((post) => (
-                            <Post key={post?._id} postData={post} />
-                        ))}
+                        <div className="filters flex justify-between my-4 relative">
+                            <h3 className="text-xl text-left">{sortBy} Posts</h3>
+                            <i
+                                className="fas fa-sort-alt hover:bg-slate-200 hover:cursor-pointer p-2 rounded-full"
+                                onClick={() => setSortOverflowMenu(prev => !prev)}
+                            ></i>
+                            {sortOverflowMenu && (
+                                <div className="absolute right-0 m-6 z-30">
+                                    <SortOverflowMenu setSortOverflow={setSortOverflowMenu} />
+                                </div>
+                            )}
+                        </div>
+
+                        {sortedPosts
+                            ?.map((post) => <Post key={post?._id} postData={post} />)}
                     </div>
 
                     <div className="sidebar-container hidden lg:block h-full w-[450px] fixed right-0">
