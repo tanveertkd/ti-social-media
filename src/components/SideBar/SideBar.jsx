@@ -16,7 +16,9 @@ const SideBar = () => {
                         </Link>
                     </li>
                     <li className="sidebar-list-item p-2 text-xl hover:cursor-pointer">
-                        <i className="far fa-compass h-6 w-6 mr-2"></i> Explore
+                        <Link to="/explore">
+                            <i className="far fa-compass h-6 w-6 mr-2"></i> Explore
+                        </Link>
                     </li>
                     <li className="sidebar-list-item p-2 text-xl hover:cursor-pointer">
                         <Link to="/bookmarks">
