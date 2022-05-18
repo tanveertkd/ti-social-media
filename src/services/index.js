@@ -12,4 +12,6 @@ export {
     createNewPostService,
     likePostService,
     dislikePostService,
+    getPostCommentsService,
+    addCommentService
 } from './postServices';

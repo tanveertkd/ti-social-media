@@ -1,5 +1,12 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { createNewPostService, getAllPostsService, likePostService, dislikePostService } from '../../services';
+import {
+    createNewPostService,
+    getAllPostsService,
+    likePostService,
+    dislikePostService,
+    getPostCommentsService,
+    addCommentService,
+} from '../../services';
 
 const getAllPostsHelper = createAsyncThunk(
     'posts/getAllPostsHelper',
@@ -29,7 +36,7 @@ const createNewPostHelper = createAsyncThunk(
 const likePostHelper = createAsyncThunk(
     'posts/likePostHelper',
     async ({ postId, token }, { rejectWithValue }) => {
-        console.log('called')
+        console.log('called');
         try {
             const response = await likePostService(postId, token);
             return response;
@@ -44,6 +51,30 @@ const dislikePostHelper = createAsyncThunk(
     async ({ postId, token }, { rejectWithValue }) => {
         try {
             const response = await dislikePostService(postId, token);
+            return response;
+        } catch (error) {
+            return rejectWithValue(error.response.data);
+        }
+    },
+);
+
+const getPostCommentsHelper = createAsyncThunk(
+    'posts/getPostCommentsHelper',
+    async (postId, { rejectWithValue }) => {
+        try {
+            const response = await getPostCommentsService(postId);
+            return response;
+        } catch (error) {
+            return rejectWithValue(error.response.data);
+        }
+    },
+);
+
+const addCommentsHelper = createAsyncThunk(
+    'posts/getPostCommentsHelper',
+    async ({ postId, userInput, token }, { rejectWithValue }) => {
+        try {
+            const response = await addCommentService(postId, userInput, token);
             return response;
         } catch (error) {
             return rejectWithValue(error.response.data);
@@ -117,8 +148,22 @@ const postSlice = createSlice({
             state.isLoading = false;
             state.error = payload.errors;
         },
+
+        // post comments
+        [addCommentsHelper.pending]: (state) => {
+            state.isLoading = true;
+        },
+        [addCommentsHelper.fulfilled]: (state, { payload }) => {
+            state.posts = payload;
+            state.isLoading = false;
+            state.error = null;
+        },
+        [addCommentsHelper.rejected]: (state, { payload }) => {
+            state.isLoading = false;
+            state.error = payload;
+        },
     },
 });
 
-export { getAllPostsHelper, createNewPostHelper, likePostHelper, dislikePostHelper };
+export { getAllPostsHelper, createNewPostHelper, likePostHelper, dislikePostHelper, addCommentsHelper };
 export const postReducer = postSlice.reducer;

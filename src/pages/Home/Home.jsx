@@ -6,7 +6,7 @@ import { getAllPostsHelper } from '../../features/posts/postSlice';
 const Home = () => {
     const { posts } = useSelector((state) => state.post);
     const dispatch = useDispatch();
-
+    
     useEffect(() => {
         dispatch(getAllPostsHelper());
     }, [dispatch]);

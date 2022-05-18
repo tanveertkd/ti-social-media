@@ -8,11 +8,11 @@ const Post = ({ postData }) => {
     const { posts } = useSelector((state) => state.post);
     const dispatch = useDispatch();
 
-    const currentLoggedUser = users.find((currUser) => currUser.username === postData.username);
-    const currentPost = posts?.find(post=>post._id === postData._id)
+    const currentLoggedUser = users?.find((currUser) => currUser?.username === postData?.username);
+    const currentPost = posts?.find(post=>post?._id === postData?._id)
 
     const isPostAlreadyLiked = (postData, username) => {
-        return postData.likes.likedBy.find((user) => user.username === username);
+        return postData?.likes?.likedBy?.find((user) => user.username === username);
     };
     
     return (
@@ -55,7 +55,7 @@ const Post = ({ postData }) => {
                     {postData?.likes?.likeCount}
                 </div>
                 <div>
-                    <Link to="/post">
+                    <Link to={`/post/${postData?._id}`}>
                         <i className="fal fa-comments hover:text-color-highlight-orange hover:cursor-pointer"></i>{' '}
                         {postData?.comments?.length}
                     </Link>

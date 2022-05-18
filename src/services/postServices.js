@@ -89,10 +89,47 @@ const dislikePostService = async (postId, encodedToken) => {
     }
 };
 
+const getPostCommentsService = async (postId) => {
+    try{
+        const response = await axios.get(`/api/comments/${postId}`);
+        console.log(response);
+        if(response.status === 200 || response.status === 201){
+            return response.data.comments;
+        }
+    }catch(error){
+        toast.error('Failed to load comments.');
+        console.log("Failed to fetch comments", error);
+    }
+}
+
+const addCommentService = async (postId, commentData, encodedToken) => {
+    try{
+        const response = await axios.post(`/api/comments/add/${postId}`, 
+            {
+                commentData
+            },
+            {
+                headers: {
+                    authorization: encodedToken
+                }
+            }
+        )
+        if(response.status === 200 || response.status === 201){
+            toast.success('Added comment!')
+            return response.data.posts;
+        }
+    }catch(error) {
+        toast.error('Failed to add comment.');
+        console.log("Failed to add comment", error);
+    }
+}
+
 export {
     getAllPostsService,
     getPostByUsername,
     createNewPostService,
     likePostService,
     dislikePostService,
+    getPostCommentsService,
+    addCommentService
 };
