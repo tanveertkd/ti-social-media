@@ -66,9 +66,9 @@ const EditProfileModal = ({ setModal, currentUser }) => {
                 <div className="form-input my-4 flex flex-col items-center">
                     <label className="avatar relative w-max cursor-pointer mx-auto my-2">
                         <img
-                            src={'https://i.pravatar.cc/200'}
+                            src={avatar ? URL.createObjectURL(avatar) : 'https://i.pravatar.cc/200'}
                             alt="profile-avatar"
-                            className="rounded-full w-fit"
+                            className="rounded-full w-[200px]"
                         />
                         <input
                             type="file"
