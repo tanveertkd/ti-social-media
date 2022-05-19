@@ -25,7 +25,7 @@ const PostComment = () => {
             text: '',
         });
     };
-
+    console.log(currentPost)
     return (
         <div className="flex flex-col h-screen">
             <div className="navbar fixed top-0 right-0 left-0 bg-primary-bg z-10">
@@ -80,9 +80,9 @@ const PostComment = () => {
                                 <div className="my-2">No comments</div>
                             )}
 
-                            {currentPost?.comments?.map((comment) => (
+                            {/* {currentPost?.comments?.map((comment) => (
                                 <Comment comment={comment} users={users} key={comment._id} />
-                            ))}
+                            ))} */}
                         </div>
                     </div>
                     <MobileNavigation />                
