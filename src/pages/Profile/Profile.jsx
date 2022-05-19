@@ -1,7 +1,24 @@
-import { Link } from 'react-router-dom';
-import { NavBar, SideBar, Post, SideBarRight } from '../../components';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
+import { NavBar, SideBar, Post, SideBarRight, EditProfileModal } from '../../components';
+import { getAllUsersHelper, getUsersPost } from '../../features/user/userSlice';
 
 const Profile = () => {
+    const { username } = useParams();
+
+    const { users, userPost } = useSelector((state) => state.users);
+    const dispatch = useDispatch();
+
+    const currentUser = users?.find((currUser) => currUser.username === username);
+
+    useEffect(() => {
+        dispatch(getAllUsersHelper());
+        dispatch(getUsersPost(username));
+    }, [dispatch, username]);
+
+    const [modal, setModal] = useState(false);
+
     return (
         <div className="flex flex-col h-screen">
             <div className="fixed top-0 right-0 left-0 bg-primary-bg">
@@ -23,54 +40,63 @@ const Profile = () => {
                         </div>
 
                         <div className="py-2">
-                            <p className="text-xl">John Doe</p>
-                            <p className="text-color-hover-grey">@doejohn</p>
+                            <p className="text-xl">
+                                {currentUser?.firstName} {currentUser?.lastName}
+                            </p>
+                            <p className="text-color-hover-grey">@{username}</p>
                         </div>
 
                         <div className="w-full py-2">
-                            <Link
-                                to="/edit-profile"
+                            <button
+                                onClick={() => setModal(true)}
                                 className="border-[1px] px-10 py-2 rounded bg-color-alert-error hover:bg-color-highlight-orange"
                             >
                                 Edit Profile
-                            </Link>
+                            </button>
                         </div>
 
+                        {modal ? (
+                            <div className="modal-container absolute top-0 right-0 bottom-0 left-0 flex justify-center items-center bg-color-modal-bg z-10">
+                                <EditProfileModal setModal={setModal} currentUser={currentUser}/>
+                            </div>
+                        ) : null}
+
                         <div className="py-2">
-                            <p>
-                                Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                                Consectetur officiis dolor deserunt quod voluptatem veniam eaque
-                                rerum tempore vitae minus laudantium corporis consequatur esse,
-                                alias accusamus!
-                            </p>
-                            <Link
-                                to={'https://www.portfolio.com'}
+                            <p>{currentUser?.bio}</p>
+                            <a
+                                href={currentUser?.site}
                                 className="underline text-color-alert-error"
                             >
-                                <i className="fal fa-globe pr-1"></i> portfolio.com
-                            </Link>
+                                <i className="fal fa-globe pr-1"></i> {currentUser?.site}
+                            </a>
                         </div>
 
                         <div className="py-2 flex justify-center border-[1px] rounded">
                             <div className="flex flex-col px-4">
-                                <p>10</p>
+                                <p>{currentUser?.following?.length}</p>
                                 <p>Following</p>
                             </div>
                             <div className="flex flex-col px-4">
-                                <p>10</p>
+                                <p>{userPost?.length}</p>
                                 <p>Posts</p>
                             </div>
                             <div className="flex flex-col px-4">
-                                <p>10</p>
+                                <p>{currentUser?.followers?.length}</p>
                                 <p>Folowers</p>
                             </div>
                         </div>
 
                         <div className="posts py-4 text-left">
                             <p className="text-xl">Your Posts</p>
-                            {[1,2,3,4,5,6,7,8,9,10].map(post => <Post />)}
+                            {userPost?.map((post) => (
+                                <Post
+                                    key={post?._id}
+                                    postData={post}
+                                    firstName={currentUser?.firstName}
+                                    lastName={currentUser?.lastName}
+                                />
+                            ))}
                         </div>
-
                     </div>
 
                     <div className="sidebar-container h-full w-[450px] fixed right-0">

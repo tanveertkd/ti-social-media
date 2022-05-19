@@ -17,7 +17,6 @@ const Landing = () => {
                         Welcome To TI <span className="text-color-alert-warning">Social!</span>
                     </h1>
                     {!newUser ? <Login /> : <Signup />}
-                    {/* <Login /> */}
                 </div>
             </div>
         </div>

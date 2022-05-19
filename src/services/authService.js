@@ -9,13 +9,14 @@ const loginService = async (username, password) => {
 };
 
 const signUpService = async (userInput) => {
-    const { firstName, lastName, email, password } = userInput;
+    const { firstName, lastName, email, username, password } = userInput;
     
     try{
         const response = await axios.post('/api/auth/signup', {
             firstName,
             lastName,
             email,
+            username,
             password,
         });
         if(response.status === 201)
