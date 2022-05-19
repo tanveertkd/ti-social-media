@@ -1,11 +1,11 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Loader, NavBar, Post, SideBar, SideBarRight } from '../../components';
+import { Loader, MobileNavigation, NavBar, Post, SideBar, SideBarRight } from '../../components';
 import { getAllBookmarksHelper } from '../../features/posts/postSlice';
 
 const Bookmarks = () => {
     const {
-        auth: { token },
+        auth: { currentUser, token },
         post: { posts, bookmarkedPosts, isLoading },
     } = useSelector((state) => state);
 
@@ -22,33 +22,35 @@ const Bookmarks = () => {
 
     return (
         <div className="flex flex-col h-screen">
-            <div className="fixed top-0 right-0 left-0 bg-primary-bg">
+            <div className="navbar fixed top-0 right-0 left-0 bg-primary-bg z-10">
                 <NavBar />
             </div>
-            <div className="w-full h-full flex justify-center p-4 mt-20">
-                <div className="home-body flex justify-center h-full w-4/5">
-                    <div className="sidebar-container h-full w-[450px] fixed left-0">
+            <div className="xs:w-screen xs:mx-auto xs:px-0 flex justify-center p-4 mt-20">
+                <div className="home-body flex h-full xs:w-full xs:px-1 w-4/5 justify-center">
+                    <div className="sidebar-container z-10 hidden md:block h-full md:w-fit xl:w-[400px] fixed left-8">
                         <SideBar />
                     </div>
 
-                    <div className="home-main px-12 w-7/12">
+                    <div className="home-main xs:w-full flex flex-col md:items-end md:w-full xl:px-12 lg:items-center lg:w-7/12">
                         <p className="text-3xl">Bookmarks</p>
-                        {isLoading ? (
-                            <div className="flex justify-center items-center h-max">
-                                <Loader />
-                            </div>
-                        ) : (
-                            <div>
-                                {bookmarks?.length > 0 ? (
-                                    bookmarks?.map((post) => <Post postData={post} />)
-                                ) : (
-                                    <div>No bookmarks added.</div>
-                                )}
-                            </div>
-                        )}
+                        <div className="md:w-2/3 md:mr-4 lg:w-3/4">
+                            {isLoading ? (
+                                <div className="flex justify-center items-center h-max">
+                                    <Loader />
+                                </div>
+                            ) : (
+                                <div>
+                                    {bookmarks?.length > 0 ? (
+                                        bookmarks?.map((post) => <Post postData={post} />)
+                                    ) : (
+                                        <div>No bookmarks added.</div>
+                                    )}
+                                </div>
+                            )}
+                        </div>
                     </div>
-
-                    <div className="sidebar-container h-full w-[450px] fixed right-0">
+                    <MobileNavigation username={currentUser?.username} />
+                    <div className="sidebar-container z-10 hidden lg:block h-full xl:w-[400px] fixed right-8">
                         <SideBarRight />
                     </div>
                 </div>

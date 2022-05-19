@@ -5,18 +5,19 @@ import { Signup } from '../../components';
 
 const Landing = () => {
     const { newUser } = useAuth();
-    console.log(newUser);
     return (
         <div className="w-screen h-full">
-            <div className="h-full justify-center items-center grid grid-cols-2">
+            <div className="relative h-full xs:flex justify-center items-center md:grid md:grid-cols-2">
                 <div className="h-full section-left flex justify-center items-center bg-color-alert-warning">
                     <img src={landing} alt="landing asset" className="w-[750px] h-[750px]" />
                 </div>
-                <div className="flex flex-col section-right items-center">
+                <div className="absolute flex flex-col section-right items-center w-full">
                     <h1 className="text-3xl m-8">
-                        Welcome To TI <span className="text-color-alert-warning">Social!</span>
+                        Welcome To TI <span className="text-color-alert-error">Social!</span>
                     </h1>
-                    {!newUser ? <Login /> : <Signup />}
+                    <div className="w-full flex justify-center">
+                        {!newUser ? <Login /> : <Signup />}
+                    </div>
                 </div>
             </div>
         </div>
