@@ -22,6 +22,8 @@ export const posts = [
     comments: [
       {
         _id: uuid(),
+        firstName: "Shubham",
+        lastName: "Soni",
         username: "shubhamsoni",
         text: "Interesting",
         votes: {
@@ -31,6 +33,8 @@ export const posts = [
       },
       {
         _id: uuid(),
+        firstName: "Soham",
+        lastName: "Shah",
         username: "sohamshah",
         text: "Wow!",
         votes: {
@@ -55,6 +59,8 @@ export const posts = [
     comments: [
       {
         _id: uuid(),
+        firstName: "Shubham",
+        lastName: "Soni",
         username: "shubhamsoni",
         text: "Interesting",
         votes: {
@@ -64,6 +70,8 @@ export const posts = [
       },
       {
         _id: uuid(),
+        firstName: "Soham",
+        lastName: "Shah",
         username: "sohamshah",
         text: "Wow!",
         votes: {
@@ -73,6 +81,8 @@ export const posts = [
       },
       {
         _id: uuid(),
+        firstName: "Bojack",
+        lastName: "Horseman",
         username: "bojack",
         text: "Whatever!",
         votes: {
@@ -96,6 +106,8 @@ export const posts = [
     comments: [
       {
         _id: uuid(),
+        firstName: "Shubham",
+        lastName: "Soni",
         username: "shubhamsoni",
         text: "Interesting",
         votes: {
@@ -105,6 +117,8 @@ export const posts = [
       },
       {
         _id: uuid(),
+        firstName: "Soham",
+        lastName: "Shah",
         username: "sohamshah",
         text: "Wow!",
         votes: {
