@@ -1,12 +1,12 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { NavBar, Post, SideBar, SideBarRight } from '../../components';
+import { Loader, NavBar, Post, SideBar, SideBarRight } from '../../components';
 import { getAllBookmarksHelper } from '../../features/posts/postSlice';
 
 const Bookmarks = () => {
     const {
         auth: { token },
-        post: { bookmarkedPosts },
+        post: { posts, bookmarkedPosts, isLoading },
     } = useSelector((state) => state);
 
     const dispatch = useDispatch();
@@ -14,6 +14,11 @@ const Bookmarks = () => {
     useEffect(() => {
         dispatch(getAllBookmarksHelper({ token }));
     }, [dispatch, token]);
+
+    // console.log(bookmarkedPosts);
+    const bookmarks = posts?.filter((post) =>
+        bookmarkedPosts.find((markedPost) => markedPost === post?._id),
+    );
 
     return (
         <div className="flex flex-col h-screen">
@@ -27,11 +32,19 @@ const Bookmarks = () => {
                     </div>
 
                     <div className="home-main px-12 w-7/12">
-                        <p className='text-3xl'>Bookmarks</p>
-                        {bookmarkedPosts?.length > 0 ? (
-                            bookmarkedPosts?.map((post) => <Post postData={post} />)
+                        <p className="text-3xl">Bookmarks</p>
+                        {isLoading ? (
+                            <div className="flex justify-center items-center h-max">
+                                <Loader />
+                            </div>
                         ) : (
-                            <div>No bookmarks added.</div>
+                            <div>
+                                {bookmarks?.length > 0 ? (
+                                    bookmarks?.map((post) => <Post postData={post} />)
+                                ) : (
+                                    <div>No bookmarks added.</div>
+                                )}
+                            </div>
                         )}
                     </div>
 

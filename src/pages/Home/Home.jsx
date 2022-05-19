@@ -7,13 +7,13 @@ import {
     SideBar,
     SideBarRight,
     SortOverflowMenu,
+    Loader,
 } from '../../components/';
 import { getAllPostsHelper } from '../../features/posts/postSlice';
 import { sortPostsBy } from '../../utils/sortPostsBy';
-
 const Home = () => {
     const {
-        post: { posts, sortBy },
+        post: { posts, sortBy, isLoading },
         auth: { currentUser },
         users: { users },
     } = useSelector((state) => state);
@@ -64,10 +64,22 @@ const Home = () => {
                             )}
                         </div>
 
-                        {sortedPosts?.length > 0 ? (
-                            sortedPosts?.map((post) => <Post key={post?._id} postData={post} />)
+                        {isLoading ? (
+                            <div className="flex justify-center items-center h-max">
+                                <Loader />
+                            </div>
                         ) : (
-                            <div>Seems empty here. You can follow someone to see their posts.</div>
+                            <div>
+                                {sortedPosts?.length > 0 ? (
+                                    sortedPosts?.map((post) => (
+                                        <Post key={post?._id} postData={post} />
+                                    ))
+                                ) : (
+                                    <div>
+                                        Seems empty here. You can follow someone to see their posts.
+                                    </div>
+                                )}
+                            </div>
                         )}
                     </div>
 

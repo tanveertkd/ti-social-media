@@ -1,14 +1,19 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { NavBar, SideBar, Post, SideBarRight, EditProfileModal } from '../../components';
-import { followUserHelper, unfollowUserHelper, getAllUsersHelper, getUsersPost } from '../../features/user/userSlice';
+import { NavBar, SideBar, Post, SideBarRight, EditProfileModal, Loader } from '../../components';
+import {
+    followUserHelper,
+    unfollowUserHelper,
+    getAllUsersHelper,
+    getUsersPost,
+} from '../../features/user/userSlice';
 
 const Profile = () => {
     const { username } = useParams();
 
     const { currentUser, token } = useSelector((state) => state.auth);
-    const { users, userPost } = useSelector((state) => state.users);
+    const { users, userPost, isLoading } = useSelector((state) => state.users);
     const dispatch = useDispatch();
 
     const currentLoggedUser = users?.find((currUser) => currUser.username === username);
@@ -125,14 +130,22 @@ const Profile = () => {
 
                         <div className="posts py-4 text-left">
                             <p className="text-xl">Your Posts</p>
-                            {userPost?.map((post) => (
-                                <Post
-                                    key={post?._id}
-                                    postData={post}
-                                    firstName={currentLoggedUser?.firstName}
-                                    lastName={currentLoggedUser?.lastName}
-                                />
-                            ))}
+                            {isLoading ? (
+                                <div className="flex justify-center items-center h-max">
+                                    <Loader />
+                                </div>
+                            ) : (
+                                <div>
+                                    {userPost?.map((post) => (
+                                        <Post
+                                            key={post?._id}
+                                            postData={post}
+                                            firstName={currentLoggedUser?.firstName}
+                                            lastName={currentLoggedUser?.lastName}
+                                        />
+                                    ))}
+                                </div>
+                            )}
                         </div>
                     </div>
 

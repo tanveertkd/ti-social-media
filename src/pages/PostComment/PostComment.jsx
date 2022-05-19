@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { NavBar, Post, SideBar, SideBarRight } from '../../components';
+import { Comment, NavBar, Post, SideBar, SideBarRight } from '../../components';
 import { addCommentsHelper } from '../../features/posts/postSlice';
 
 const PostComment = () => {
@@ -11,7 +11,6 @@ const PostComment = () => {
     const { users } = useSelector((state) => state.users);
     const currentPost = posts?.find((post) => post?._id === postId);
     const currentPostUser = users?.find((user) => currentPost?.username === user.username);
-    // console.log(currentPost);
 
     const dispatch = useDispatch();
 
@@ -22,6 +21,9 @@ const PostComment = () => {
     const handleComment = (event, userInput) => {
         event.preventDefault();
         dispatch(addCommentsHelper({ postId: currentPost._id, userInput, token }));
+        setUserInput({
+            text: '',
+        });
     };
 
     return (
@@ -48,6 +50,7 @@ const PostComment = () => {
                                     cols="60"
                                     rows="5"
                                     placeholder="Comment"
+                                    value={userInput.text}
                                     onChange={(e) =>
                                         setUserInput({ ...userInput, text: e.target.value })
                                     }
@@ -62,24 +65,18 @@ const PostComment = () => {
                             </form>
                         </div>
 
-                        {currentPost?.comments?.map((comment) => (
-                            <div
-                                className="post border-[1px] p-4 border-color-text-lighter-grey rounded my-4 shadow-md"
-                                key={comment?._id}
-                            >
-                                <li className="list-none flex items-center">
-                                    <i className="far fa-user-circle pr-2 text-4xl"></i>
-                                    <div className="flex justify-center items-center">
-                                        <p className="text-lg">{comment?.firstName} {comment?.lastName}</p>
-                                        <p className="text-sm px-2">@{comment?.username}</p>
-                                        <p className="separator pr-2">•</p>
-                                        <p className="text-sm">
-                                            24<sup>th</sup>Sep 2022
-                                        </p>
-                                    </div>
-                                </li>
-                                <li className="list-none text-left py-2">{comment?.text}</li>
+                        {currentPost?.comments?.length > 0 ? (
+                            <div>
+                                {currentPost?.comments?.map((comment) => (
+                                    <Comment comment={comment} users={users} key={comment._id} />
+                                ))}
                             </div>
+                        ) : (
+                            <div className='my-2'>No comments</div>
+                        )}
+
+                        {currentPost?.comments?.map((comment) => (
+                            <Comment comment={comment} users={users} key={comment._id} />
                         ))}
                     </div>
 

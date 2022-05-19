@@ -8,3 +8,5 @@ export { EditProfileModal } from './EditProfileModal/EditProfileModal';
 export { OverflowMenu } from './OverflowMenu/OverflowMenu';
 export { EditPostModal } from './EditPostModal/EditPostModal';
 export { SortOverflowMenu } from './SortOverflowMenu/SortOverflowMenu';
+export { Loader } from './Loader/Loader'
+export { Comment } from './Comment/Comment';
