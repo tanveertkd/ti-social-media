@@ -12,7 +12,7 @@ const SortOverflowMenu = ({ setSortOverflow }) => {
                     setSortOverflow(false);
                 }}
             >
-                Trending
+                <i className="fas fa-rss pr-2 text-color-hover-light-grey"></i> Trending
             </li>
             <li
                 className="p-2 hover:cursor-pointer hover:bg-neutral-600"
@@ -21,7 +21,7 @@ const SortOverflowMenu = ({ setSortOverflow }) => {
                     setSortOverflow(false);
                 }}
             >
-                Latest
+                <i class="fas fa-arrow-up text-color-hover-light-grey"></i> Latest
             </li>
             <li
                 className="p-2 hover:cursor-pointer hover:bg-neutral-600"
@@ -30,7 +30,7 @@ const SortOverflowMenu = ({ setSortOverflow }) => {
                     setSortOverflow(false);
                 }}
             >
-                Oldest
+                <i class="fas fa-arrow-down text-color-hover-light-grey"></i> Oldest
             </li>
         </div>
     );

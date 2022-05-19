@@ -54,7 +54,7 @@ const Home = () => {
                         <div className="filters flex justify-between my-4 relative">
                             <h3 className="text-xl text-left">{sortBy} Posts</h3>
                             <i
-                                className="fas fa-sort-alt hover:bg-slate-200 hover:cursor-pointer p-2 rounded-full"
+                                className="fa fa-sort-alt hover:bg-slate-200 hover:cursor-pointer p-2 rounded-full"
                                 onClick={() => setSortOverflowMenu((prev) => !prev)}
                             ></i>
                             {sortOverflowMenu && (
