@@ -34,7 +34,7 @@ const SideBarRight = () => {
     }, [dispatch]);
 
     return (
-        <div className="hidden lg:block lg:w-3/5 lg:mx-auto xl:w-9/12 xl:ml-0 border-[1px] border-color-grey rounded">
+        <div className="hidden lg:block  lg:w-full lg:mx-auto xl:w-9/12 xl:ml-0 border-[1px] border-color-grey rounded">
             <h3 className="text-xl text-left p-2 w-full bg-color-grey text-primary-bg">
                 Who to follow?
             </h3>

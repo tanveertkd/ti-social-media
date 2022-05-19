@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux';
-import { NavBar, Post, SideBar, SideBarRight } from '../../components';
+import { MobileNavigation, NavBar, Post, SideBar, SideBarRight } from '../../components';
 
 const Explore = () => {
     const { posts } = useSelector((state) => state.post);
@@ -26,6 +26,7 @@ const Explore = () => {
                     </div>
                 </div>
             </div>
+            <MobileNavigation />
         </div>
     );
 };

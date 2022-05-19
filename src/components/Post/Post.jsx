@@ -41,24 +41,32 @@ const Post = ({ postData }) => {
                 </div>
             ) : null}
             <div className="list-none flex items-center justify-between">
-                <div className="flex">
-                    <div className="w-[48px] mr-2">
-                        <img
-                            src={currentLoggedUser?.avatarUrl}
-                            alt={currentLoggedUser?.username}
-                            className="rounded-full"
-                        />
-                    </div>
-                    <div className="flex justify-center items-center">
-                        <p className="text-lg">
-                            {currentLoggedUser?.firstName} {currentLoggedUser?.lastName}
-                        </p>
-                        <p className="text-sm px-2">@{postData?.username}</p>
-                        <p className="separator pr-2">•</p>
-                        <p className="text-sm">
-                            24<sup>th</sup>Sep 2022
-                        </p>
-                    </div>
+                <div className="flex hover:cursor-pointer xs:w-full">
+                    <Link to={`/profile/${currentLoggedUser?.username}`} className="flex xs:w-full">
+                        <div className="w-[48px] mr-2">
+                            <img
+                                src={currentLoggedUser?.avatarUrl}
+                                alt={currentLoggedUser?.username}
+                                className="rounded-full"
+                            />
+                        </div>
+                        <div className="flex md:justify-start justify-center items-center xs:w-full xs:justify-start">
+                            <div className="md:flex md:justify-start">
+                                <p className="lg:text-lg xs:text-base text-left">
+                                    {currentLoggedUser?.firstName} {currentLoggedUser?.lastName}
+                                </p>
+                                <p className="text-sm xs:px-0 md:px-2 md:m-auto">
+                                    @{postData?.username}
+                                </p>
+                            </div>
+                            <div className="flex items-center md:justify-start">
+                                <p className="separator pr-2 hidden md:flex">•</p>
+                                <p className="text-xs xs:mx-2">
+                                    24<sup>th</sup>Sep 2022
+                                </p>
+                            </div>
+                        </div>
+                    </Link>
                 </div>
                 <div
                     className="hover:bg-slate-200 px-2 rounded-full hover:cursor-pointer relative"
