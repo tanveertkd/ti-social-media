@@ -11,7 +11,7 @@ const Landing = () => {
                 <div className="h-full section-left flex justify-center items-center bg-color-alert-warning">
                     <img src={landing} alt="landing asset" className="w-[750px] h-[750px]" />
                 </div>
-                <div className="absolute flex flex-col section-right items-center w-full">
+                <div className="xs:absolute md:relative flex flex-col section-right items-center w-full">
                     <h1 className="text-3xl m-8">
                         Welcome To TI <span className="text-color-alert-error">Social!</span>
                     </h1>
