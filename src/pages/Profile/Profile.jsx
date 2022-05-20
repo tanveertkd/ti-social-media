@@ -2,22 +2,23 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { NavBar, SideBar, Post, SideBarRight, EditProfileModal } from '../../components';
-import { getAllUsersHelper, getUsersPost } from '../../features/user/userSlice';
+import { followUserHelper, unfollowUserHelper, getAllUsersHelper, getUsersPost } from '../../features/user/userSlice';
 
 const Profile = () => {
     const { username } = useParams();
 
+    const { currentUser, token } = useSelector((state) => state.auth);
     const { users, userPost } = useSelector((state) => state.users);
     const dispatch = useDispatch();
 
-    const currentUser = users?.find((currUser) => currUser.username === username);
+    const currentLoggedUser = users?.find((currUser) => currUser.username === username);
+    const user = users?.find((currUser) => currUser.username === currentUser.username);
+    const [modal, setModal] = useState(false);
 
     useEffect(() => {
         dispatch(getAllUsersHelper());
         dispatch(getUsersPost(username));
     }, [dispatch, username]);
-
-    const [modal, setModal] = useState(false);
 
     return (
         <div className="flex flex-col h-screen">
@@ -33,47 +34,83 @@ const Profile = () => {
                     <div className="profile-main px-12 w-7/12 mx-auto">
                         <div className="flex justify-center">
                             <img
-                                src={'https://i.pravatar.cc/200'}
+                                src={currentLoggedUser?.avatarUrl}
                                 alt="profile-avatar"
-                                className="rounded-full"
+                                className="rounded-full w-[200px]"
                             />
                         </div>
 
                         <div className="py-2">
                             <p className="text-xl">
-                                {currentUser?.firstName} {currentUser?.lastName}
+                                {currentLoggedUser?.firstName} {currentLoggedUser?.lastName}
                             </p>
                             <p className="text-color-hover-grey">@{username}</p>
                         </div>
 
                         <div className="w-full py-2">
-                            <button
-                                onClick={() => setModal(true)}
-                                className="border-[1px] px-10 py-2 rounded bg-color-alert-error hover:bg-color-highlight-orange"
-                            >
-                                Edit Profile
-                            </button>
+                            {currentUser?.username === currentLoggedUser?.username ? (
+                                <button
+                                    onClick={() => setModal(true)}
+                                    className="border-[1px] px-10 py-2 rounded bg-color-alert-error hover:bg-color-highlight-orange"
+                                >
+                                    Edit Profile
+                                </button>
+                            ) : user?.following?.find(
+                                  (followedUser) =>
+                                      currentLoggedUser.username === followedUser.username,
+                              ) ? (
+                                <button
+                                    onClick={() =>
+                                        dispatch(
+                                            unfollowUserHelper({
+                                                followUserId: currentLoggedUser?._id,
+                                                token,
+                                            }),
+                                        )
+                                    }
+                                    className="border-[1px] px-10 py-2 rounded bg-color-alert-error hover:bg-color-highlight-orange"
+                                >
+                                    Unfollow
+                                </button>
+                            ) : (
+                                <button
+                                    onClick={() =>
+                                        dispatch(
+                                            followUserHelper({
+                                                followUserId: currentLoggedUser?._id,
+                                                token,
+                                            }),
+                                        )
+                                    }
+                                    className="border-[1px] px-10 py-2 rounded bg-color-alert-error hover:bg-color-highlight-orange"
+                                >
+                                    Follow
+                                </button>
+                            )}
                         </div>
 
                         {modal ? (
                             <div className="modal-container absolute top-0 right-0 bottom-0 left-0 flex justify-center items-center bg-color-modal-bg z-10">
-                                <EditProfileModal setModal={setModal} currentUser={currentUser}/>
+                                <EditProfileModal
+                                    setModal={setModal}
+                                    currentUser={currentLoggedUser}
+                                />
                             </div>
                         ) : null}
 
                         <div className="py-2">
-                            <p>{currentUser?.bio}</p>
+                            <p>{currentLoggedUser?.bio}</p>
                             <a
-                                href={currentUser?.site}
+                                href={currentLoggedUser?.site}
                                 className="underline text-color-alert-error"
                             >
-                                <i className="fal fa-globe pr-1"></i> {currentUser?.site}
+                                <i className="fal fa-globe pr-1"></i> {currentLoggedUser?.site}
                             </a>
                         </div>
 
                         <div className="py-2 flex justify-center border-[1px] rounded">
                             <div className="flex flex-col px-4">
-                                <p>{currentUser?.following?.length}</p>
+                                <p>{currentLoggedUser?.following?.length}</p>
                                 <p>Following</p>
                             </div>
                             <div className="flex flex-col px-4">
@@ -81,7 +118,7 @@ const Profile = () => {
                                 <p>Posts</p>
                             </div>
                             <div className="flex flex-col px-4">
-                                <p>{currentUser?.followers?.length}</p>
+                                <p>{currentLoggedUser?.followers?.length}</p>
                                 <p>Folowers</p>
                             </div>
                         </div>
@@ -92,8 +129,8 @@ const Profile = () => {
                                 <Post
                                     key={post?._id}
                                     postData={post}
-                                    firstName={currentUser?.firstName}
-                                    lastName={currentUser?.lastName}
+                                    firstName={currentLoggedUser?.firstName}
+                                    lastName={currentLoggedUser?.lastName}
                                 />
                             ))}
                         </div>

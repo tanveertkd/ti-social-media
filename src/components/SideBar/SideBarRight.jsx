@@ -1,6 +1,11 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { followUserHelper, getAllUsersHelper, unfollowUserHelper } from '../../features/user/userSlice';
+import { Link } from 'react-router-dom';
+import {
+    followUserHelper,
+    getAllUsersHelper,
+    unfollowUserHelper,
+} from '../../features/user/userSlice';
 
 const SideBarRight = () => {
     const { token } = useSelector((state) => state.auth);
@@ -26,7 +31,7 @@ const SideBarRight = () => {
 
     useEffect(() => {
         dispatch(dispatch(() => getAllUsersHelper()));
-    },[dispatch])
+    }, [dispatch]);
 
     return (
         <div className="hidden lg:block lg:w-3/5 lg:mx-auto xl:w-9/12 xl:ml-0 border-[1px] border-color-grey rounded">
@@ -38,15 +43,23 @@ const SideBarRight = () => {
                     .map((user) => {
                         return (
                             <div className="flex justify-between py-1" key={user?._id}>
-                                <li className="sidebar-list-item text-lg list-none flex items-center hover:cursor-pointer">
-                                    <i className="far fa-user-circle pr-2 text-3xl"></i>
-                                    <div className="flex flex-col justify-start">
-                                        <p className="text-left">
-                                            {user?.firstName} {user?.lastName}
-                                        </p>
-                                        <p className="text-left">@{user?.username}</p>
-                                    </div>
-                                </li>
+                                <Link to={`/profile/${user?.username}`}>
+                                    <li className="sidebar-list-item text-lg list-none flex items-center hover:cursor-pointer">
+                                        <div className="w-[48px] mr-2">
+                                            <img
+                                                src={user?.avatarUrl}
+                                                alt={user?.username}
+                                                className="rounded-full"
+                                            />
+                                        </div>
+                                        <div className="flex flex-col justify-start">
+                                            <p className="text-left">
+                                                {user?.firstName} {user?.lastName}
+                                            </p>
+                                            <p className="text-left">@{user?.username}</p>
+                                        </div>
+                                    </li>
+                                </Link>
                                 {currentUserData?.following?.find(
                                     (followedUser) => user.username === followedUser.username,
                                 ) ? (

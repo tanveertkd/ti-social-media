@@ -3,7 +3,8 @@ export { Signup } from './Authentication/Signup';
 export { NavBar } from './NavBar/NavBar';
 export { SideBar, SideBarRight } from './SideBar/';
 export { PostInput } from './PostInput/PostInput';
-export { Post } from './Post/Post'
+export { Post } from './Post/Post';
 export { EditProfileModal } from './EditProfileModal/EditProfileModal';
 export { OverflowMenu } from './OverflowMenu/OverflowMenu';
 export { EditPostModal } from './EditPostModal/EditPostModal';
+export { SortOverflowMenu } from './SortOverflowMenu/SortOverflowMenu';

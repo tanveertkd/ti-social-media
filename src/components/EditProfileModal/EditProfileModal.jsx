@@ -2,7 +2,11 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { editUserHelper } from '../../features/user/userSlice';
 
+import toast from 'react-hot-toast';
+
 const EditProfileModal = ({ setModal, currentUser }) => {
+    const CLOUDINARY_URL = 'https://api.cloudinary.com/v1_1/ddroedz3j/image/upload';
+
     const dispatch = useDispatch();
     const { token } = useSelector((state) => state.auth);
     const { firstName, lastName, email, bio, site } = currentUser;
@@ -14,15 +18,44 @@ const EditProfileModal = ({ setModal, currentUser }) => {
         site: site,
     });
 
-    const editHandler = (e, userInput) => {
+    const [avatar, setAvatar] = useState('');
+
+    const editHandler = async (e, userInput) => {
         e.preventDefault();
+        if (avatar) {
+            const avatarFile = avatar;
+            const formData = new FormData();
+            formData.append('file', avatarFile);
+            formData.append('upload_preset', 'ti_social');
+            formData.append('folder', 'ti_social');
+
+            try {
+                await fetch(CLOUDINARY_URL, {
+                    method: 'POST',
+                    body: formData,
+                })
+                    .then((response) => response.json())
+                    .then((data) =>
+                        dispatch(
+                            editUserHelper({
+                                userInput: { ...userInput, avatarUrl: data.url },
+                                token,
+                            }),
+                        ),
+                    );
+            } catch (error) {
+                toast("Couldn't upload image.");
+                console.log(error);
+            }
+        } else {
+            dispatch(editUserHelper({ userInput, token }));
+        }
         setModal(false);
-        dispatch(editUserHelper({ userInput, token }));
     };
     return (
         <div className="py-4 border-[1px] bg-primary-bg w-[500px] z-10 border-color-grey rounded flex flex-col items-center justify-center">
             <i
-                class="fal fa-times w-full flex justify-end mr-8 hover:cursor-pointer"
+                className="fal fa-times w-full flex justify-end mr-8 hover:cursor-pointer"
                 onClick={() => setModal(false)}
             ></i>
             <p className="text-xl w-10/12 my-4">Edit your profile</p>
@@ -30,8 +63,27 @@ const EditProfileModal = ({ setModal, currentUser }) => {
                 className="login-input-form w-10/12"
                 onSubmit={(event) => editHandler(event, userInput)}
             >
+                <div className="form-input my-4 flex flex-col items-center">
+                    <label className="avatar relative w-max cursor-pointer mx-auto my-2">
+                        <img
+                            src={'https://i.pravatar.cc/200'}
+                            alt="profile-avatar"
+                            className="rounded-full w-fit"
+                        />
+                        <input
+                            type="file"
+                            className="hidden"
+                            onChange={(e) => {
+                                Math.round(e.target.files[0].size / 1024000) > 1
+                                    ? toast.error('Max file size is 1MB')
+                                    : setAvatar(e.target.files[0]);
+                            }}
+                        />
+                        <i className="fas fa-camera absolute text-xl text-color-grey bottom-2 right-4"></i>
+                    </label>
+                </div>
                 <div className="form-input my-4 flex flex-col">
-                    <label for="login-firstName" className="input-label text-left text-base">
+                    <label htmlFor="login-firstName" className="input-label text-left text-base">
                         {' '}
                         First Name:{' '}
                     </label>
@@ -52,7 +104,7 @@ const EditProfileModal = ({ setModal, currentUser }) => {
                 </div>
 
                 <div className="form-input my-4 flex flex-col">
-                    <label for="login-lastName" className="input-label text-left text-base">
+                    <label htmlFor="login-lastName" className="input-label text-left text-base">
                         {' '}
                         Last Name:{' '}
                     </label>
@@ -73,7 +125,7 @@ const EditProfileModal = ({ setModal, currentUser }) => {
                 </div>
 
                 <div className="form-input my-4 flex flex-col">
-                    <label for="login-email" className="input-label text-left text-base">
+                    <label htmlFor="login-email" className="input-label text-left text-base">
                         {' '}
                         Email:{' '}
                     </label>
@@ -94,7 +146,7 @@ const EditProfileModal = ({ setModal, currentUser }) => {
                 </div>
 
                 <div className="form-input my-4 flex flex-col">
-                    <label for="login-email" className="input-label text-left text-base">
+                    <label htmlFor="login-email" className="input-label text-left text-base">
                         {' '}
                         Bio:{' '}
                     </label>
@@ -115,7 +167,7 @@ const EditProfileModal = ({ setModal, currentUser }) => {
                 </div>
 
                 <div className="form-input my-4 flex flex-col">
-                    <label for="login-email" className="input-label text-left text-base">
+                    <label htmlFor="login-email" className="input-label text-left text-base">
                         {' '}
                         Website:{' '}
                     </label>

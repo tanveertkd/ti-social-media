@@ -25,7 +25,8 @@ const Post = ({ postData }) => {
     };
 
     const isPostAuthor = (post) => post.username === currentUser.username;
-    const isPostBookmarked = (bookmarks, postId) => bookmarks.find((bookmark) => bookmark?._id === postId);
+    const isPostBookmarked = (bookmarks, postId) =>
+        bookmarks.find((bookmark) => bookmark?._id === postId);
 
     const [postOverflowMenu, setPostOverflowMenu] = useState(false);
     const [editModal, setEditModal] = useState(false);
@@ -41,7 +42,9 @@ const Post = ({ postData }) => {
             ) : null}
             <div className="list-none flex items-center justify-between">
                 <div className="flex">
-                    <i className="far fa-user-circle pr-2 text-4xl"></i>
+                    <div className="w-[48px] mr-2">
+                        <img src={currentLoggedUser?.avatarUrl} alt={currentLoggedUser?.username} className="rounded-full" />
+                    </div>
                     <div className="flex justify-center items-center">
                         <p className="text-lg">
                             {currentLoggedUser?.firstName} {currentLoggedUser?.lastName}
@@ -54,7 +57,7 @@ const Post = ({ postData }) => {
                     </div>
                 </div>
                 <div
-                    className="hover:bg-color-text-lighter-grey px-2 rounded-full hover:cursor-pointer relative"
+                    className="hover:bg-slate-200 px-2 rounded-full hover:cursor-pointer relative"
                     onClick={() => setPostOverflowMenu((menuState) => !menuState)}
                 >
                     <i className="far fa-ellipsis-v hover:cursor-pointer p-2"></i>
