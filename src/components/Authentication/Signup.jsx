@@ -21,7 +21,7 @@ const Signup = () => {
     }
 
     return (
-        <div className="login-container border-[1px] border-color-grey rounded w-[500px] h-[700px] p-4, flex flex-col, justify-center, shadow-xl">
+        <div className="right login-container bg-primary-bg border-[1px] border-color-grey rounded xs:w-max md:w-[500px] md:h-[600px] p-4 flex flex-col justify-center shadow-xl">
             <div className="login w-full flex flex-col justify-center items-center">
                 <p className="login-header text-3xl">Sign Up</p>
 

@@ -214,6 +214,82 @@ export const posts = [
         ],
         createdAt: '2022-03-03',
         updatedAt: formatDate(),
+      },
+      {
+          _id: uuid(),
+          content:
+              'Hey! How are you doing?',
+          likes: {
+              likeCount: 0,
+              likedBy: [],
+              dislikedBy: [],
+          },
+          username: 'doejohn',
+
+          comments: [
+              {
+                  _id: uuid(),
+                  firstName: 'Shubham',
+                  lastName: 'Soni',
+                  username: 'shubhamsoni',
+                  text: 'Interesting',
+                  votes: {
+                      upvotedBy: [],
+                      downvotedBy: [],
+                  },
+              },
+              {
+                  _id: uuid(),
+                  firstName: 'Soham',
+                  lastName: 'Shah',
+                  username: 'sohamshah',
+                  text: 'Wow!',
+                  votes: {
+                      upvotedBy: [],
+                      downvotedBy: [],
+                  },
+              },
+          ],
+          createdAt: '2022-03-03',
+          updatedAt: formatDate(),
+    },
+    {
+        _id: uuid(),
+        content:
+            'Hey! At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga.',
+        likes: {
+            likeCount: 0,
+            likedBy: [],
+            dislikedBy: [],
+        },
+        username: 'doejohn',
+
+        comments: [
+            {
+                _id: uuid(),
+                firstName: 'Shubham',
+                lastName: 'Soni',
+                username: 'shubhamsoni',
+                text: 'Interesting',
+                votes: {
+                    upvotedBy: [],
+                    downvotedBy: [],
+                },
+            },
+            {
+                _id: uuid(),
+                firstName: 'Soham',
+                lastName: 'Shah',
+                username: 'sohamshah',
+                text: 'Wow!',
+                votes: {
+                    upvotedBy: [],
+                    downvotedBy: [],
+                },
+            },
+        ],
+        createdAt: '2022-03-03',
+        updatedAt: formatDate(),
     },
     {
         _id: uuid(),

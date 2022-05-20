@@ -69,7 +69,6 @@ const deletePostHelper = createAsyncThunk(
 const likePostHelper = createAsyncThunk(
     'posts/likePostHelper',
     async ({ postId, token }, { rejectWithValue }) => {
-        console.log('called');
         try {
             const response = await likePostService(postId, token);
             return response;
@@ -106,6 +105,7 @@ const getPostCommentsHelper = createAsyncThunk(
 const addCommentsHelper = createAsyncThunk(
     'posts/getPostCommentsHelper',
     async ({ postId, userInput, token }, { rejectWithValue }) => {
+        console.log(postId, userInput, token)
         try {
             const response = await addCommentService(postId, userInput, token);
             return response;

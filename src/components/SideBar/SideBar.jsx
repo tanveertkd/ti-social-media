@@ -1,5 +1,9 @@
 import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
+
+const active = {
+    color: '#ff3d00',
+};
 
 const SideBar = () => {
     const {
@@ -10,37 +14,58 @@ const SideBar = () => {
     const currentUser = users?.find((currUser) => currUser.username === username);
 
     return (
-        <div className="hidden lg:flex flex-col justify-between w-full items-center">
-            <div className="top-section w-80">
+        // hidden lg:flex
+        <div className="flex flex-col justify-between w-full items-center">
+            <div className="top-section md:w-50 xl:w-80">
                 <ul className="sidebar-ul text-left px-4">
-                    <li className="sidebar-list-item p-2 text-xl hover:cursor-pointer">
-                        <Link to="/home">
+                    <li className="sidebar-list-item p-2 lg:text-xl hover:cursor-pointer">
+                        <NavLink
+                            to="/home"
+                            style={({ isActive }) => (isActive ? active : undefined)}
+                        >
                             <i className="far fa-home-alt h-6 w-6 mr-2"></i> Home
-                        </Link>
+                        </NavLink>
                     </li>
-                    <li className="sidebar-list-item p-2 text-xl hover:cursor-pointer">
-                        <Link to="/explore">
+                    <li className="sidebar-list-item p-2 lg:text-xl hover:cursor-pointer">
+                        <NavLink
+                            to="/explore"
+                            style={({ isActive }) => (isActive ? active : undefined)}
+                        >
                             <i className="far fa-compass h-6 w-6 mr-2"></i> Explore
-                        </Link>
+                        </NavLink>
                     </li>
-                    <li className="sidebar-list-item p-2 text-xl hover:cursor-pointer">
-                        <Link to="/bookmarks">
+                    <li className="sidebar-list-item p-2 lg:text-xl hover:cursor-pointer">
+                        <NavLink
+                            to="/bookmarks"
+                            style={({ isActive }) => (isActive ? active : undefined)}
+                        >
                             <i className="far fa-bookmark h-6 w-6 mr-2"></i> Bookamrks
-                        </Link>
+                        </NavLink>
                     </li>
-                    <li className="sidebar-list-item p-2 text-xl hover:cursor-pointer">
+                    <li className="sidebar-list-item p-2 lg:text-xl hover:cursor-pointer">
                         <i className="far fa-bell h-6 w-6 mr-2"></i> Notifications
                     </li>
-                    <li className="sidebar-list-item p-2 text-xl hover:cursor-pointer">
-                        <Link to={`/profile/${username}`}>
+                    <li className="sidebar-list-item p-2 lg:text-xl hover:cursor-pointer">
+                        <NavLink
+                            to="/people"
+                            style={({ isActive }) => (isActive ? active : undefined)}
+                        >
+                            <i className="far fa-users h-6 w-6 mr-2"></i> People
+                        </NavLink>
+                    </li>
+                    <li className="sidebar-list-item p-2 lg:text-xl hover:cursor-pointer">
+                        <NavLink
+                            to={`/profile/${username}`}
+                            style={({ isActive }) => (isActive ? active : undefined)}
+                        >
                             <i className="far fa-user-circle h-6 w-6 mr-2"></i> Profile
-                        </Link>
+                        </NavLink>
                     </li>
                 </ul>
             </div>
 
-            <div className="bottom-section w-80 flex justify-between mt-20 px-4">
-                <li className="sidebar-list-item p-2 text-xl list-none flex items-center hover:cursor-pointer">
+            <div className="bottom-section md:w-50 xl:w-80 flex justify-between mt-20 px-4">
+                <li className="sidebar-list-item p-2 lg:text-xl list-none flex items-center hover:cursor-pointer">
                     <Link to={`/profile/${username}`} className="flex items-center">
                         <div className="w-[48px] mr-2">
                             <img

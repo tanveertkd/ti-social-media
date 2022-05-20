@@ -43,7 +43,7 @@ const PostInput = () => {
                     </div>
                     <button
                         type="submit"
-                        className="bg-color-highlight-orange text-primary-bg h-10 w-44 rounded-sm hover:bg-color-alert-error"
+                        className="bg-color-highlight-orange text-primary-bg md:h-10 xs:h-8 xs:w-36 md:w-44 rounded-sm hover:bg-color-alert-error"
                     >
                         Create Post
                     </button>
