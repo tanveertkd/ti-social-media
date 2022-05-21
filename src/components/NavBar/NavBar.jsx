@@ -13,13 +13,9 @@ const NavBar = () => {
     const navigate = useNavigate();
 
     const handleSearch = (e) => {
-        console.log(setSearchedUser(searchInput.searchedUser));
         dispatch(setSearchedUser(searchInput.searchedUser));
         navigate('/people');
     };
-
-    const { searchUserResult } = useSelector((state) => state.users);
-    console.log('searchedusers', searchUserResult);
 
     return (
         <div>
@@ -53,10 +49,15 @@ const NavBar = () => {
                                 onChange={(e) => {
                                     setSearchInput({ searchedUser: e.target.value });
                                 }}
+                                onKeyDown={(e) => {
+                                    if (e.key === 'Enter') {
+                                        handleSearch();
+                                    }
+                                }}
                             />
                             <i
                                 className="far fa-search nav-main-middle-icn hover:cursor-pointer absolute ml-[-20px] xs:mt-3 md:mt-1.5"
-                                onClick={(e) => handleSearch(e, searchInput)}
+                                onClick={() => handleSearch()}
                             ></i>
                         </label>
                     </li>
