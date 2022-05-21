@@ -9,7 +9,7 @@ const Explore = () => {
     const postReversed = [...posts]?.reverse();
     
     const dispatch = useDispatch();
-    useEffect(() => dispatch(resetSearch()))
+    useEffect(() => {dispatch(resetSearch())}, [dispatch]);
 
     return (
         <div className="flex flex-col h-screen">
