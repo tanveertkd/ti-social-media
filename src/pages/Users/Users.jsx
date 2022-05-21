@@ -12,6 +12,7 @@ const Users = () => {
     const { token } = useSelector((state) => state.auth);
     const { users } = useSelector((state) => state.users);
     const { currentUser } = useSelector((state) => state.auth);
+    const { searchUserResult } = useSelector((state) => state.users);
     const dispatch = useDispatch();
 
     const {
@@ -48,72 +49,140 @@ const Users = () => {
 
                     <div className="home-main xs:w-full flex flex-col md:items-end md:w-full xl:px-12 lg:items-center lg:w-7/12">
                         <div className="md:w-2/3 md:mr-4 lg:w-3/4">
-                            <h3 className="text-xl text-left">People</h3>
-                            <div className="xs:w-full lg:block lg:w-full lg:mx-auto xl:w-9/12 xl:ml-0">
-                                {/* <h3 className="text-xl text-left p-2 w-full bg-color-grey text-primary-bg">
-                                All Users
-                            </h3> */}
+                            <h3 className="text-3xl text-center">People</h3>
+                            <div className="xs:w-full lg:block lg:w-full lg:mx-auto xl:w-9/12">
                                 <div className="flex flex-col w-full px-2">
-                                    {suggestedUsers.map((user) => {
-                                        return (
-                                            <div
-                                                className="flex justify-between py-1"
-                                                key={user?._id}
-                                            >
-                                                <Link to={`/profile/${user?.username}`}>
-                                                    <li className="sidebar-list-item text-lg list-none flex items-center hover:cursor-pointer">
-                                                        <div className="w-[48px] mr-2">
-                                                            <img
-                                                                src={user?.avatarUrl}
-                                                                alt={user?.username}
-                                                                className="rounded-full"
-                                                            />
-                                                        </div>
-                                                        <div className="flex flex-col justify-start">
-                                                            <p className="text-left">
-                                                                {user?.firstName} {user?.lastName}
-                                                            </p>
-                                                            <p className="text-left">
-                                                                @{user?.username}
-                                                            </p>
-                                                        </div>
-                                                    </li>
-                                                </Link>
-                                                {currentUserData?.following?.find(
-                                                    (followedUser) =>
-                                                        user.username === followedUser.username,
-                                                ) ? (
-                                                    <li
-                                                        className="sidebar-list-item text-xl list-none flex items-center hover:cursor-pointer"
-                                                        onClick={() =>
-                                                            dispatch(
-                                                                unfollowUserHelper({
-                                                                    followUserId: user._id,
-                                                                    token,
-                                                                }),
-                                                            )
-                                                        }
+                                    {searchUserResult?.length > 0 ? (
+                                        <div>
+                                            {searchUserResult.map((user) => {
+                                                return (
+                                                    <div
+                                                        className="flex justify-between py-1"
+                                                        key={user?._id}
                                                     >
-                                                        <i className="fal fa-user-minus"></i>
-                                                    </li>
-                                                ) : (
-                                                    <li
-                                                        className="sidebar-list-item text-xl list-none flex items-center hover:cursor-pointer"
-                                                        onClick={() =>
-                                                            dispatch(
-                                                                followUserHelper({
-                                                                    followUserId: user._id,
-                                                                    token,
-                                                                }),
-                                                            )
-                                                        }
+                                                        <Link to={`/profile/${user?.username}`}>
+                                                            <li className="sidebar-list-item text-lg list-none flex items-center hover:cursor-pointer">
+                                                                <div className="w-[48px] mr-2">
+                                                                    <img
+                                                                        src={user?.avatarUrl}
+                                                                        alt={user?.username}
+                                                                        className="rounded-full"
+                                                                    />
+                                                                </div>
+                                                                <div className="flex flex-col justify-start">
+                                                                    <p className="text-left">
+                                                                        {user?.firstName}{' '}
+                                                                        {user?.lastName}
+                                                                    </p>
+                                                                    <p className="text-left">
+                                                                        @{user?.username}
+                                                                    </p>
+                                                                </div>
+                                                            </li>
+                                                        </Link>
+                                                        {currentUserData?.following?.find(
+                                                            (followedUser) =>
+                                                                user.username ===
+                                                                followedUser.username,
+                                                        ) ? (
+                                                            <li
+                                                                className="sidebar-list-item text-xl list-none flex items-center hover:cursor-pointer"
+                                                                onClick={() =>
+                                                                    dispatch(
+                                                                        unfollowUserHelper({
+                                                                            followUserId: user._id,
+                                                                            token,
+                                                                        }),
+                                                                    )
+                                                                }
+                                                            >
+                                                                <i className="fal fa-user-minus"></i>
+                                                            </li>
+                                                        ) : (
+                                                            <li
+                                                                className="sidebar-list-item text-xl list-none flex items-center hover:cursor-pointer"
+                                                                onClick={() =>
+                                                                    dispatch(
+                                                                        followUserHelper({
+                                                                            followUserId: user._id,
+                                                                            token,
+                                                                        }),
+                                                                    )
+                                                                }
+                                                            >
+                                                                <i className="fal fa-user-plus"></i>
+                                                            </li>
+                                                        )}
+                                                    </div>
+                                                );
+                                            })}
+                                        </div>
+                                    ) : (
+                                        <div>
+                                            {suggestedUsers.map((user) => {
+                                                return (
+                                                    <div
+                                                        className="flex justify-between py-1"
+                                                        key={user?._id}
                                                     >
-                                                        <i className="fal fa-user-plus"></i>
-                                                    </li>
-                                                )}
-                                            </div>
-                                        );
-                                    })}
+                                                        <Link to={`/profile/${user?.username}`}>
+                                                            <li className="sidebar-list-item text-lg list-none flex items-center hover:cursor-pointer">
+                                                                <div className="w-[48px] mr-2">
+                                                                    <img
+                                                                        src={user?.avatarUrl}
+                                                                        alt={user?.username}
+                                                                        className="rounded-full"
+                                                                    />
+                                                                </div>
+                                                                <div className="flex flex-col justify-start">
+                                                                    <p className="text-left">
+                                                                        {user?.firstName}{' '}
+                                                                        {user?.lastName}
+                                                                    </p>
+                                                                    <p className="text-left">
+                                                                        @{user?.username}
+                                                                    </p>
+                                                                </div>
+                                                            </li>
+                                                        </Link>
+                                                        {currentUserData?.following?.find(
+                                                            (followedUser) =>
+                                                                user.username ===
+                                                                followedUser.username,
+                                                        ) ? (
+                                                            <li
+                                                                className="sidebar-list-item text-xl list-none flex items-center hover:cursor-pointer"
+                                                                onClick={() =>
+                                                                    dispatch(
+                                                                        unfollowUserHelper({
+                                                                            followUserId: user._id,
+                                                                            token,
+                                                                        }),
+                                                                    )
+                                                                }
+                                                            >
+                                                                <i className="fal fa-user-minus"></i>
+                                                            </li>
+                                                        ) : (
+                                                            <li
+                                                                className="sidebar-list-item text-xl list-none flex items-center hover:cursor-pointer"
+                                                                onClick={() =>
+                                                                    dispatch(
+                                                                        followUserHelper({
+                                                                            followUserId: user._id,
+                                                                            token,
+                                                                        }),
+                                                                    )
+                                                                }
+                                                            >
+                                                                <i className="fal fa-user-plus"></i>
+                                                            </li>
+                                                        )}
+                                                    </div>
+                                                );
+                                            })}
+                                        </div>
+                                    )}
                                 </div>
                             </div>
                         </div>
@@ -124,7 +193,7 @@ const Users = () => {
                     </div>
                 </div>
             </div>
-            <MobileNavigation username={currentUser?.username}/>
+            <MobileNavigation username={currentUser?.username} />
         </div>
     );
 };

@@ -179,7 +179,6 @@ const getAllBookmarksService = async (encodedToken) => {
             },
         });
         if (response.status === 200 || response.status === 201) {
-            console.log('service log', response);
             return response.data.bookmarks;
         }
     } catch (error) {

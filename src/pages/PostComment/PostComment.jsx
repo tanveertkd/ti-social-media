@@ -25,7 +25,9 @@ const PostComment = () => {
             text: '',
         });
     };
-    console.log(currentPost)
+
+    const currentPostComments = currentPost?.comments;
+
     return (
         <div className="flex flex-col h-screen">
             <div className="navbar fixed top-0 right-0 left-0 bg-primary-bg z-10">
@@ -68,7 +70,7 @@ const PostComment = () => {
 
                             {currentPost?.comments?.length > 0 ? (
                                 <div>
-                                    {currentPost?.comments?.map((comment) => (
+                                    {[...currentPostComments].reverse().map((comment) => (
                                         <Comment
                                             comment={comment}
                                             users={users}
@@ -79,13 +81,9 @@ const PostComment = () => {
                             ) : (
                                 <div className="my-2">No comments</div>
                             )}
-
-                            {/* {currentPost?.comments?.map((comment) => (
-                                <Comment comment={comment} users={users} key={comment._id} />
-                            ))} */}
                         </div>
                     </div>
-                    <MobileNavigation />                
+                    <MobileNavigation />
                     <div className="sidebar-container z-10 hidden lg:block h-full xl:w-[400px] fixed right-8">
                         <SideBarRight />
                     </div>

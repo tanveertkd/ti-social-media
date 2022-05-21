@@ -55,6 +55,7 @@ const authSlice = createSlice({
         },
 
         [loginHelper.fulfilled]: (state, { payload }) => {
+            console.log(payload.foundUser)
             state.currentUser = payload.foundUser;
             state.token = payload.encodedToken;
             state.isAuthLoading = false;
