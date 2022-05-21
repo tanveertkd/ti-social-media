@@ -90,12 +90,29 @@ const initialState = {
     userPost: [],
     isLoading: false,
     error: null,
+    searchedUser: '',
+    searchUserResult: [],
 };
 
 const userSlice = createSlice({
     name: 'users',
     initialState,
-    reducers: {},
+    reducers: {
+        setSearchedUser: (state, { payload }) => {
+            state.searchedUser = payload;
+            state.searchUserResult = state.users?.filter(
+                (user) =>
+                    user.username.toLowerCase().includes(state.searchedUser) ||
+                    user.firstName.toLowerCase().includes(state.searchedUser) ||
+                    user.lastName.toLowerCase().includes(state.searchedUser),
+            );
+        },
+
+        resetSearch: (state) => {
+            state.searchedUser = '';
+            state.searchUserResult = [];
+        },
+    },
     extraReducers: {
         // All users
         [getAllUsersHelper.pending]: (state) => {
@@ -179,4 +196,5 @@ const userSlice = createSlice({
 });
 
 export { getAllUsersHelper, getUsersPost, editUserHelper, followUserHelper, unfollowUserHelper };
+export const { setSearchedUser, resetSearch } = userSlice.actions;
 export const userReducer = userSlice.reducer;

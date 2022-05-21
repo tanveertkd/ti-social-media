@@ -12,6 +12,7 @@ import {
     MobileNavigation,
 } from '../../components/';
 import { getAllPostsHelper } from '../../features/posts/postSlice';
+import { getAllUsersHelper, resetSearch } from '../../features/user/userSlice';
 import { sortPostsBy } from '../../utils/sortPostsBy';
 const Home = () => {
     const {
@@ -37,7 +38,9 @@ const Home = () => {
     const [sortOverflowMenu, setSortOverflowMenu] = useState(false);
 
     useEffect(() => {
+        dispatch(getAllUsersHelper());
         dispatch(getAllPostsHelper());
+        dispatch(resetSearch());
     }, [dispatch]);
 
     return (

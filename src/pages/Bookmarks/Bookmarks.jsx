@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Loader, MobileNavigation, NavBar, Post, SideBar, SideBarRight } from '../../components';
 import { getAllBookmarksHelper } from '../../features/posts/postSlice';
+import { resetSearch } from '../../features/user/userSlice';
 
 const Bookmarks = () => {
     const {
@@ -13,9 +14,9 @@ const Bookmarks = () => {
 
     useEffect(() => {
         dispatch(getAllBookmarksHelper({ token }));
+        dispatch(resetSearch());
     }, [dispatch, token]);
 
-    // console.log(bookmarkedPosts);
     const bookmarks = posts?.filter((post) =>
         bookmarkedPosts.find((markedPost) => markedPost === post?._id),
     );

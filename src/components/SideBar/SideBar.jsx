@@ -39,7 +39,7 @@ const SideBar = () => {
                             to="/bookmarks"
                             style={({ isActive }) => (isActive ? active : undefined)}
                         >
-                            <i className="far fa-bookmark h-6 w-6 mr-2"></i> Bookamrks
+                            <i className="far fa-bookmark h-6 w-6 mr-2"></i> Bookmarks
                         </NavLink>
                     </li>
                     <li className="sidebar-list-item p-2 lg:text-xl hover:cursor-pointer">

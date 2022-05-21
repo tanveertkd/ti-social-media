@@ -10,8 +10,11 @@ const NavRoutes = () => {
         <Routes>
             <Route element={<PrivateRoutes />}>
                 <Route path="/home" element={<Home />} />
-                {/* <Route path="/post" element={<PostComment />} /> */}
                 <Route path="/profile/:username" element={<Profile />} />
+                <Route path="/post/:postId" element={<PostComment />} />
+                <Route path="/bookmarks" element={<Bookmarks />} />
+                <Route path="/explore" element={<Explore />} />
+                <Route path="/people" element={<Users />} />
             </Route>
 
             {!token ? (
@@ -22,9 +25,9 @@ const NavRoutes = () => {
                 <>
                     <Route path="/" element={<Navigate to="/home" />} />
                     <Route path="/post/:postId" element={<PostComment />} />
-                    <Route path='/bookmarks' element={<Bookmarks />} />
-                    <Route path='/explore' element={<Explore />} />
-                    <Route path='/people' element={<Users />} />
+                    <Route path="/bookmarks" element={<Bookmarks />} />
+                    <Route path="/explore" element={<Explore />} />
+                    <Route path="/people" element={<Users />} />
                 </>
             )}
         </Routes>

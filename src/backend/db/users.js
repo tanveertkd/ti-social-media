@@ -15,8 +15,38 @@ export const users = [
     avatarUrl: "https://res.cloudinary.com/ddroedz3j/image/upload/v1652916870/ti_social/janedoe2_fv22e8.png",
     bio: "Every balika should aspire to be me!",
     site: "https://adarshbalika.netlify.app",
-    followers: [],
-    following: [],
+    followers: [
+      {
+        _id: uuid(),
+        firstName: "John",
+        lastName: "Doe",
+        username: "doejohn",
+        avatarUrl: "https://res.cloudinary.com/ddroedz3j/image/upload/v1652913261/ti_social/tjibrgteb7zwgbemjr4v.jpg",
+      },
+      {
+        _id: uuid(),
+        firstName: "Jane",
+        lastName: "Doe",
+        username: "doejane",
+        avatarUrl: "https://res.cloudinary.com/ddroedz3j/image/upload/v1652916790/ti_social/janedoe_cwfzti.png",
+      }
+    ],
+    following: [
+      {
+        _id: uuid(),
+        firstName: "Boris",
+        lastName: "Johnson",
+        username: "bjohnson",
+        avatarUrl: "https://res.cloudinary.com/ddroedz3j/image/upload/v1652917031/ti_social/johndoe_pb37ox.png",
+      },
+      {
+        _id: uuid(),
+        firstName: "John",
+        lastName: "Doe",
+        username: "doejohn",
+        avatarUrl: "https://res.cloudinary.com/ddroedz3j/image/upload/v1652913261/ti_social/tjibrgteb7zwgbemjr4v.jpg",
+      },
+    ],
     createdAt: formatDate(),
     updatedAt: formatDate(),
   },

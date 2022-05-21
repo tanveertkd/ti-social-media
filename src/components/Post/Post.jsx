@@ -9,6 +9,7 @@ import {
 } from '../../features/posts/postSlice';
 import { EditPostModal } from '../EditPostModal/EditPostModal';
 import { OverflowMenu } from '../OverflowMenu/OverflowMenu';
+import { postTime } from '../../utils/postTime';
 
 const Post = ({ postData }) => {
     const { token, currentUser } = useSelector((state) => state.auth);
@@ -62,7 +63,7 @@ const Post = ({ postData }) => {
                             <div className="flex items-center md:justify-start">
                                 <p className="separator pr-2 hidden md:flex">•</p>
                                 <p className="text-xs xs:mx-2">
-                                    24<sup>th</sup>Sep 2022
+                                    {postTime(postData?.createdAt)}
                                 </p>
                             </div>
                         </div>
