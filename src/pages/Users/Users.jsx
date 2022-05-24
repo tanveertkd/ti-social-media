@@ -1,16 +1,12 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { MobileNavigation, NavBar, SideBar, SideBarRight } from '../../components';
-import {
-    followUserHelper,
-    getAllUsersHelper,
-    unfollowUserHelper,
-} from '../../features/user/userSlice';
+import { Loader, MobileNavigation, NavBar, SideBar, SideBarRight } from '../../components';
+import { UserCard } from '../../components/UserCard/UserCard';
+import { getAllUsersHelper } from '../../features/user/userSlice';
 
 const Users = () => {
     const { token } = useSelector((state) => state.auth);
-    const { users } = useSelector((state) => state.users);
+    const { users, isLoading } = useSelector((state) => state.users);
     const { currentUser } = useSelector((state) => state.auth);
     const { searchUserResult } = useSelector((state) => state.users);
     const dispatch = useDispatch();
@@ -38,82 +34,33 @@ const Users = () => {
 
     return (
         <div className="flex flex-col h-screen">
-            <div className="fixed top-0 right-0 left-0 bg-primary-bg z-10">
+            <div className="navbar fixed top-0 right-0 left-0 bg-primary-bg z-10">
                 <NavBar />
             </div>
-            <div className="xs:w-screen xs:mx-auto xs:px-0 w-full h-full flex justify-center p-4 mt-20">
+            <div className="xs:w-screen xs:mx-auto xs:px-0 flex justify-center p-4 mt-20">
                 <div className="home-body flex h-full xs:w-full xs:px-1 w-4/5 justify-center">
-                    <div className="sidebar-container z-10 hidden md:block h-full md:w-fit xl:w-[400px] fixed left-8">
+                    <div className="sidebar-container z-10 hidden md:block h-full md:w-fit xl:w-[300px] fixed left-8">
                         <SideBar />
                     </div>
 
                     <div className="home-main xs:w-full flex flex-col md:items-end md:w-full xl:px-12 lg:items-center lg:w-7/12">
-                        <div className="md:w-2/3 md:mr-4 lg:w-3/4">
-                            <h3 className="text-3xl text-center">People</h3>
-                            <div className="xs:w-full lg:block lg:w-full lg:mx-auto xl:w-9/12">
-                                <div className="flex flex-col w-full px-2">
+                        <div className="md:w-2/3 md:mr-4 lg:w-3/4 xl:w-11/12">
+                            <p className="text-3xl">People</p>
+                            {isLoading ? (
+                                <div className="flex justify-center items-center h-max">
+                                    <Loader />
+                                </div>
+                            ) : (
+                                <div>
                                     {searchUserResult?.length > 0 ? (
                                         <div>
                                             {searchUserResult.map((user) => {
                                                 return (
-                                                    <div
-                                                        className="flex justify-between py-1"
-                                                        key={user?._id}
-                                                    >
-                                                        <Link to={`/profile/${user?.username}`}>
-                                                            <li className="sidebar-list-item text-lg list-none flex items-center hover:cursor-pointer">
-                                                                <div className="w-[48px] mr-2">
-                                                                    <img
-                                                                        src={user?.avatarUrl}
-                                                                        alt={user?.username}
-                                                                        className="rounded-full"
-                                                                    />
-                                                                </div>
-                                                                <div className="flex flex-col justify-start">
-                                                                    <p className="text-left">
-                                                                        {user?.firstName}{' '}
-                                                                        {user?.lastName}
-                                                                    </p>
-                                                                    <p className="text-left">
-                                                                        @{user?.username}
-                                                                    </p>
-                                                                </div>
-                                                            </li>
-                                                        </Link>
-                                                        {currentUserData?.following?.find(
-                                                            (followedUser) =>
-                                                                user.username ===
-                                                                followedUser.username,
-                                                        ) ? (
-                                                            <li
-                                                                className="sidebar-list-item text-xl list-none flex items-center hover:cursor-pointer"
-                                                                onClick={() =>
-                                                                    dispatch(
-                                                                        unfollowUserHelper({
-                                                                            followUserId: user._id,
-                                                                            token,
-                                                                        }),
-                                                                    )
-                                                                }
-                                                            >
-                                                                <i className="fal fa-user-minus"></i>
-                                                            </li>
-                                                        ) : (
-                                                            <li
-                                                                className="sidebar-list-item text-xl list-none flex items-center hover:cursor-pointer"
-                                                                onClick={() =>
-                                                                    dispatch(
-                                                                        followUserHelper({
-                                                                            followUserId: user._id,
-                                                                            token,
-                                                                        }),
-                                                                    )
-                                                                }
-                                                            >
-                                                                <i className="fal fa-user-plus"></i>
-                                                            </li>
-                                                        )}
-                                                    </div>
+                                                    <UserCard
+                                                        token={token}
+                                                        user={user}
+                                                        currentUserData={currentUserData}
+                                                    />
                                                 );
                                             })}
                                         </div>
@@ -121,79 +68,27 @@ const Users = () => {
                                         <div>
                                             {suggestedUsers.map((user) => {
                                                 return (
-                                                    <div
-                                                        className="flex justify-between py-1"
-                                                        key={user?._id}
-                                                    >
-                                                        <Link to={`/profile/${user?.username}`}>
-                                                            <li className="sidebar-list-item text-lg list-none flex items-center hover:cursor-pointer">
-                                                                <div className="w-[48px] mr-2">
-                                                                    <img
-                                                                        src={user?.avatarUrl}
-                                                                        alt={user?.username}
-                                                                        className="rounded-full"
-                                                                    />
-                                                                </div>
-                                                                <div className="flex flex-col justify-start">
-                                                                    <p className="text-left">
-                                                                        {user?.firstName}{' '}
-                                                                        {user?.lastName}
-                                                                    </p>
-                                                                    <p className="text-left">
-                                                                        @{user?.username}
-                                                                    </p>
-                                                                </div>
-                                                            </li>
-                                                        </Link>
-                                                        {currentUserData?.following?.find(
-                                                            (followedUser) =>
-                                                                user.username ===
-                                                                followedUser.username,
-                                                        ) ? (
-                                                            <li
-                                                                className="sidebar-list-item text-xl list-none flex items-center hover:cursor-pointer"
-                                                                onClick={() =>
-                                                                    dispatch(
-                                                                        unfollowUserHelper({
-                                                                            followUserId: user._id,
-                                                                            token,
-                                                                        }),
-                                                                    )
-                                                                }
-                                                            >
-                                                                <i className="fal fa-user-minus"></i>
-                                                            </li>
-                                                        ) : (
-                                                            <li
-                                                                className="sidebar-list-item text-xl list-none flex items-center hover:cursor-pointer"
-                                                                onClick={() =>
-                                                                    dispatch(
-                                                                        followUserHelper({
-                                                                            followUserId: user._id,
-                                                                            token,
-                                                                        }),
-                                                                    )
-                                                                }
-                                                            >
-                                                                <i className="fal fa-user-plus"></i>
-                                                            </li>
-                                                        )}
-                                                    </div>
+                                                    <UserCard
+                                                        token={token}
+                                                        user={user}
+                                                        currentUserData={currentUserData}
+                                                    />
                                                 );
                                             })}
                                         </div>
                                     )}
                                 </div>
-                            </div>
+                            )}
                         </div>
+
+                        <MobileNavigation username={currentUser?.username} />
                     </div>
 
-                    <div className="sidebar-container z-10 hidden lg:block h-full xl:w-[400px] fixed right-8">
+                    <div className="sidebar-container z-10 hidden lg:block h-full xl:w-[300px] fixed right-8">
                         <SideBarRight />
                     </div>
                 </div>
             </div>
-            <MobileNavigation username={currentUser?.username} />
         </div>
     );
 };
