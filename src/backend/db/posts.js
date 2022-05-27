@@ -29,6 +29,7 @@ export const posts = [
                     upvotedBy: [],
                     downvotedBy: [],
                 },
+                createdAt: '2022-01-01',
             },
             {
                 _id: uuid(),
@@ -40,6 +41,7 @@ export const posts = [
                     upvotedBy: [],
                     downvotedBy: [],
                 },
+                createdAt: '2022-01-02',
             },
         ],
     },
@@ -66,6 +68,7 @@ export const posts = [
                     upvotedBy: [],
                     downvotedBy: [],
                 },
+                createdAt: '2022-01-03',
             },
             {
                 _id: uuid(),
@@ -77,6 +80,7 @@ export const posts = [
                     upvotedBy: [],
                     downvotedBy: [],
                 },
+                createdAt: '2022-01-03',
             },
             {
                 _id: uuid(),
@@ -88,6 +92,7 @@ export const posts = [
                     upvotedBy: [],
                     downvotedBy: [],
                 },
+                createdAt: '2022-01-03',
             },
         ],
     },
@@ -111,6 +116,7 @@ export const posts = [
                     upvotedBy: [],
                     downvotedBy: [],
                 },
+                createdAt: '2022-02-04',
             },
             {
                 _id: uuid(),
@@ -122,6 +128,7 @@ export const posts = [
                     upvotedBy: [],
                     downvotedBy: [],
                 },
+                createdAt: '2022-02-06',
             },
             {
                 _id: uuid(),
@@ -133,6 +140,7 @@ export const posts = [
                     upvotedBy: [],
                     downvotedBy: [],
                 },
+                createdAt: '2022-02-05',
             },
         ],
         createdAt: '2022-02-04',
@@ -159,6 +167,7 @@ export const posts = [
                     upvotedBy: [],
                     downvotedBy: [],
                 },
+                createdAt: '2022-01-02'
             },
             {
                 _id: uuid(),
@@ -170,6 +179,7 @@ export const posts = [
                     upvotedBy: [],
                     downvotedBy: [],
                 },
+                createdAt: '2022-01-02'
             },
         ],
         createdAt: '2022-01-02',
@@ -196,6 +206,7 @@ export const posts = [
                     upvotedBy: [],
                     downvotedBy: [],
                 },
+                createdAt: '2022-03-03',
             },
             {
                 _id: uuid(),
@@ -207,6 +218,7 @@ export const posts = [
                     upvotedBy: [],
                     downvotedBy: [],
                 },
+                createdAt: '2022-03-03',
             },
         ],
         createdAt: '2022-03-03',
@@ -233,6 +245,7 @@ export const posts = [
                     upvotedBy: [],
                     downvotedBy: [],
                 },
+                createdAt: '2022-03-05'
             },
             {
                 _id: uuid(),
@@ -244,6 +257,7 @@ export const posts = [
                     upvotedBy: [],
                     downvotedBy: [],
                 },
+                createdAt: '2022-03-04'
             },
         ],
         createdAt: '2022-03-03',
@@ -271,6 +285,7 @@ export const posts = [
                     upvotedBy: [],
                     downvotedBy: [],
                 },
+                createdAt: '2022-03-06',
             },
             {
                 _id: uuid(),
@@ -282,6 +297,7 @@ export const posts = [
                     upvotedBy: [],
                     downvotedBy: [],
                 },
+                createdAt: '2022-03-03',
             },
         ],
         createdAt: '2022-03-03',
@@ -308,6 +324,7 @@ export const posts = [
                     upvotedBy: [],
                     downvotedBy: [],
                 },
+                createdAt: '2022-01-11',
             },
             {
                 _id: uuid(),
@@ -319,6 +336,7 @@ export const posts = [
                     upvotedBy: [],
                     downvotedBy: [],
                 },
+                createdAt: '2022-01-11',
             },
         ],
         createdAt: '2022-01-11',

@@ -1,3 +1,5 @@
+import { postTime } from "../../utils/postTime";
+
 const Comment = ({ comment, users }) => {
     const currentCommentAuthor = users?.find(user => user?.username === comment?.username);
     return (
@@ -20,7 +22,7 @@ const Comment = ({ comment, users }) => {
                     <p className="text-sm px-2">@{comment?.username}</p>
                     <p className="separator pr-2">•</p>
                     <p className="text-sm">
-                        24<sup>th</sup>Sep 2022
+                        {postTime(comment?.createdAt)}
                     </p>
                 </div>
             </li>
