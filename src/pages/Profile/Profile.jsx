@@ -117,6 +117,8 @@ const Profile = () => {
                                 <a
                                     href={currentLoggedUser?.site}
                                     className="underline text-color-alert-error"
+                                    target="_blank"
+                                    rel="noreferrer"
                                 >
                                     <i className="fal fa-globe pr-1"></i> {currentLoggedUser?.site}
                                 </a>
