@@ -8,7 +8,7 @@ const Users = () => {
     const { token } = useSelector((state) => state.auth);
     const { users, isLoading } = useSelector((state) => state.users);
     const { currentUser } = useSelector((state) => state.auth);
-    const { searchUserResult } = useSelector((state) => state.users);
+    const { searchedUser, searchUserResult } = useSelector((state) => state.users);
     const dispatch = useDispatch();
 
     const {
@@ -19,14 +19,14 @@ const Users = () => {
     const suggestedUsers = users.filter((user) => user.username !== username);
 
     // Will use this if I decide to remove users from list after following
-    const filteredSuggestedUsers = users
-        ?.filter((user) => user.username !== currentUserData.username)
-        ?.filter(
-            (user) =>
-                !currentUserData?.following.find(
-                    (followedUser) => followedUser.username === user.username,
-                ),
-        );
+    // const filteredSuggestedUsers = users
+    //     ?.filter((user) => user.username !== currentUserData.username)
+    //     ?.filter(
+    //         (user) =>
+    //             !currentUserData?.following.find(
+    //                 (followedUser) => followedUser.username === user.username,
+    //             ),
+    //     );
 
     useEffect(() => {
         dispatch(dispatch(() => getAllUsersHelper()));
@@ -60,6 +60,7 @@ const Users = () => {
                                                         token={token}
                                                         user={user}
                                                         currentUserData={currentUserData}
+                                                        key={user._id}
                                                     />
                                                 );
                                             })}
@@ -72,9 +73,19 @@ const Users = () => {
                                                         token={token}
                                                         user={user}
                                                         currentUserData={currentUserData}
+                                                        key={user._id}
                                                     />
                                                 );
                                             })}
+                                            {searchUserResult.length === 0 && searchedUser !== '' && (
+                                                <div className="my-2 text-lg">
+                                                    <p>Your search didn't match any users.</p>
+                                                    <p>
+                                                        We returned a list of users you might be
+                                                        interested in.
+                                                    </p>
+                                                </div>
+                                            )}
                                         </div>
                                     )}
                                 </div>

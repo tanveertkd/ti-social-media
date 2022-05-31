@@ -11,3 +11,4 @@ export { SortOverflowMenu } from './SortOverflowMenu/SortOverflowMenu';
 export { Loader } from './Loader/Loader'
 export { Comment } from './Comment/Comment';
 export { MobileNavigation } from './MobileNavigation/MobileNavigation';
+export { SearchModal } from './SearchModal/SearchModal';

@@ -32,15 +32,15 @@ const PostInput = () => {
                     className="border-[1px] border-color-grey p-2 rounded-sm outline-none focus:border-color-idle"
                 ></textarea>
 
-                <div className="flex justify-between my-2">
-                    <div className="post-attachments flex items-center">
+                <div className="flex justify-end my-2">
+                    {/* <div className="post-attachments flex items-center">
                         <div className="post-attachment-item mr-2">
                             <i className="fal fa-image text-2xl"></i>
                         </div>
                         <div className="post-attachment-item">
                             <i className="fal fa-smile text-2xl"></i>
                         </div>
-                    </div>
+                    </div> */}
                     <button
                         type="submit"
                         className="bg-color-highlight-orange text-primary-bg md:h-10 xs:h-8 xs:w-36 md:w-44 rounded-sm hover:bg-color-alert-error"
