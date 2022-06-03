@@ -12,9 +12,12 @@ const Landing = () => {
                     <img src={landing} alt="landing asset" className="w-[750px] h-[750px]" />
                 </div>
                 <div className="xs:absolute md:relative flex flex-col section-right items-center w-full">
-                    <h1 className="text-3xl m-8">
+                    <h1 className="text-3xl m-8 mb-0">
                         Welcome To TI <span className="text-color-alert-error">Social!</span>
                     </h1>
+                    <h2 className="text-xl m-8">
+                        A social networking site for you and your buddies!
+                    </h2>
                     <div className="w-full flex justify-center">
                         {!newUser ? <Login /> : <Signup />}
                     </div>

@@ -9,7 +9,7 @@ import {
 } from '../../features/posts/postSlice';
 import { EditPostModal } from '../EditPostModal/EditPostModal';
 import { OverflowMenu } from '../OverflowMenu/OverflowMenu';
-import { postTime } from '../../utils/postTime';
+import { postTime, getSharableLink } from '../../utils/';
 
 const Post = ({ postData }) => {
     const { token, currentUser } = useSelector((state) => state.auth);
@@ -38,7 +38,12 @@ const Post = ({ postData }) => {
         >
             {editModal ? (
                 <div className="edit-modal-container absolute top-0 right-0 bottom-0 left-0 z-10 w-full flex justify-center items-center bg-color-modal-bg">
-                    <EditPostModal postData={postData} setEditModal={setEditModal} token={token} />
+                    <EditPostModal
+                        postData={postData}
+                        setEditModal={setEditModal}
+                        token={token}
+                        userAvatar={currentLoggedUser?.avatarUrl}
+                    />
                 </div>
             ) : null}
             <div className="list-none flex items-center justify-between">
@@ -62,9 +67,7 @@ const Post = ({ postData }) => {
                             </div>
                             <div className="flex items-center md:justify-start">
                                 <p className="separator pr-2 hidden md:flex">•</p>
-                                <p className="text-xs xs:mx-2">
-                                    {postTime(postData?.createdAt)}
-                                </p>
+                                <p className="text-xs xs:mx-2">{postTime(postData?.createdAt)}</p>
                             </div>
                         </div>
                     </Link>
@@ -115,7 +118,10 @@ const Post = ({ postData }) => {
                     </Link>
                 </div>
                 <div>
-                    <i className="fal fa-share hover:text-color-highlight-orange hover:cursor-pointer"></i>
+                    <i
+                        className="fal fa-share hover:text-color-highlight-orange hover:cursor-pointer"
+                        onClick={() => getSharableLink(postData?._id)}
+                    ></i>
                 </div>
                 <div>
                     {!isPostBookmarked(bookmarkedPosts, postData?._id) ? (

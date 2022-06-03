@@ -43,9 +43,6 @@ const SideBar = () => {
                         </NavLink>
                     </li>
                     <li className="sidebar-list-item p-2 lg:text-xl hover:cursor-pointer">
-                        <i className="far fa-bell h-6 w-6 mr-2"></i> Notifications
-                    </li>
-                    <li className="sidebar-list-item p-2 lg:text-xl hover:cursor-pointer">
                         <NavLink
                             to="/people"
                             style={({ isActive }) => (isActive ? active : undefined)}
@@ -81,9 +78,6 @@ const SideBar = () => {
                             <p>@{username}</p>
                         </div>
                     </Link>
-                </li>
-                <li className="sidebar-list-item p-2 text-xl list-none flex items-center hover:cursor-pointer">
-                    <i className="far fa-ellipsis-h"></i>
                 </li>
             </div>
         </div>

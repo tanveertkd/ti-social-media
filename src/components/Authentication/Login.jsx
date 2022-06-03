@@ -13,8 +13,8 @@ const Login = () => {
     });
 
     const guestInput = {
-        username: 'adarshbalika',
-        password: 'adarshBalika123',
+        username: 'tanveerhazarika',
+        password: 'test123',
     };
 
     const dispatch = useDispatch();

@@ -9,14 +9,13 @@ import { formatDate } from '../utils/authUtils';
 export const posts = [
     {
         _id: uuid(),
-        content:
-            'At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga.',
+        content: 'Hey! This seems really exciting!',
         likes: {
             likeCount: 0,
             likedBy: [],
             dislikedBy: [],
         },
-        username: 'adarshbalika',
+        username: 'tanveerhazarika',
         createdAt: '2022-01-01',
         updatedAt: formatDate(),
         comments: [
@@ -30,6 +29,7 @@ export const posts = [
                     upvotedBy: [],
                     downvotedBy: [],
                 },
+                createdAt: '2022-01-01',
             },
             {
                 _id: uuid(),
@@ -41,19 +41,20 @@ export const posts = [
                     upvotedBy: [],
                     downvotedBy: [],
                 },
+                createdAt: '2022-01-02',
             },
         ],
     },
     {
         _id: uuid(),
         content:
-            'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum provident quo voluptatem quas velit autem esse. Facere non optio quisquam ratione! Iste sint incidunt ab tempore optio cumque laborum temporibus.',
+            'This seems new.',
         likes: {
             likeCount: 0,
             likedBy: [],
             dislikedBy: [],
         },
-        username: 'adarshbalika',
+        username: 'tanveerhazarika',
         createdAt: '2022-01-03',
         updatedAt: formatDate(),
         comments: [
@@ -67,6 +68,7 @@ export const posts = [
                     upvotedBy: [],
                     downvotedBy: [],
                 },
+                createdAt: '2022-01-03',
             },
             {
                 _id: uuid(),
@@ -78,6 +80,7 @@ export const posts = [
                     upvotedBy: [],
                     downvotedBy: [],
                 },
+                createdAt: '2022-01-03',
             },
             {
                 _id: uuid(),
@@ -89,6 +92,7 @@ export const posts = [
                     upvotedBy: [],
                     downvotedBy: [],
                 },
+                createdAt: '2022-01-03',
             },
         ],
     },
@@ -112,6 +116,7 @@ export const posts = [
                     upvotedBy: [],
                     downvotedBy: [],
                 },
+                createdAt: '2022-02-04',
             },
             {
                 _id: uuid(),
@@ -123,6 +128,7 @@ export const posts = [
                     upvotedBy: [],
                     downvotedBy: [],
                 },
+                createdAt: '2022-02-06',
             },
             {
                 _id: uuid(),
@@ -134,6 +140,7 @@ export const posts = [
                     upvotedBy: [],
                     downvotedBy: [],
                 },
+                createdAt: '2022-02-05',
             },
         ],
         createdAt: '2022-02-04',
@@ -141,14 +148,13 @@ export const posts = [
     },
     {
         _id: uuid(),
-        content:
-            'Have you seen John?',
+        content: 'Have you seen John?',
         likes: {
             likeCount: 0,
             likedBy: [],
             dislikedBy: [],
         },
-        username: 'doejane',
+        username: 'himadrishah',
 
         comments: [
             {
@@ -161,6 +167,7 @@ export const posts = [
                     upvotedBy: [],
                     downvotedBy: [],
                 },
+                createdAt: '2022-01-02'
             },
             {
                 _id: uuid(),
@@ -172,6 +179,7 @@ export const posts = [
                     upvotedBy: [],
                     downvotedBy: [],
                 },
+                createdAt: '2022-01-02'
             },
         ],
         createdAt: '2022-01-02',
@@ -179,14 +187,13 @@ export const posts = [
     },
     {
         _id: uuid(),
-        content:
-            'Hey!',
+        content: 'Hey!',
         likes: {
             likeCount: 0,
             likedBy: [],
             dislikedBy: [],
         },
-        username: 'doejohn',
+        username: 'tanveerhazarika',
 
         comments: [
             {
@@ -199,6 +206,7 @@ export const posts = [
                     upvotedBy: [],
                     downvotedBy: [],
                 },
+                createdAt: '2022-03-03',
             },
             {
                 _id: uuid(),
@@ -210,59 +218,21 @@ export const posts = [
                     upvotedBy: [],
                     downvotedBy: [],
                 },
+                createdAt: '2022-03-03',
             },
         ],
         createdAt: '2022-03-03',
         updatedAt: formatDate(),
-      },
-      {
-          _id: uuid(),
-          content:
-              'Hey! How are you doing?',
-          likes: {
-              likeCount: 0,
-              likedBy: [],
-              dislikedBy: [],
-          },
-          username: 'doejohn',
-
-          comments: [
-              {
-                  _id: uuid(),
-                  firstName: 'Shubham',
-                  lastName: 'Soni',
-                  username: 'shubhamsoni',
-                  text: 'Interesting',
-                  votes: {
-                      upvotedBy: [],
-                      downvotedBy: [],
-                  },
-              },
-              {
-                  _id: uuid(),
-                  firstName: 'Soham',
-                  lastName: 'Shah',
-                  username: 'sohamshah',
-                  text: 'Wow!',
-                  votes: {
-                      upvotedBy: [],
-                      downvotedBy: [],
-                  },
-              },
-          ],
-          createdAt: '2022-03-03',
-          updatedAt: formatDate(),
     },
     {
         _id: uuid(),
-        content:
-            'Hey! At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga.',
+        content: 'Hey! How are you doing?',
         likes: {
             likeCount: 0,
             likedBy: [],
             dislikedBy: [],
         },
-        username: 'doejohn',
+        username: 'belidenikhil',
 
         comments: [
             {
@@ -275,6 +245,7 @@ export const posts = [
                     upvotedBy: [],
                     downvotedBy: [],
                 },
+                createdAt: '2022-03-05'
             },
             {
                 _id: uuid(),
@@ -286,6 +257,7 @@ export const posts = [
                     upvotedBy: [],
                     downvotedBy: [],
                 },
+                createdAt: '2022-03-04'
             },
         ],
         createdAt: '2022-03-03',
@@ -294,13 +266,13 @@ export const posts = [
     {
         _id: uuid(),
         content:
-            'This is cool',
+            'You would not believe what I just saw!',
         likes: {
             likeCount: 0,
             likedBy: [],
             dislikedBy: [],
         },
-        username: 'doejane',
+        username: 'belidenikhil',
 
         comments: [
             {
@@ -313,6 +285,7 @@ export const posts = [
                     upvotedBy: [],
                     downvotedBy: [],
                 },
+                createdAt: '2022-03-06',
             },
             {
                 _id: uuid(),
@@ -324,6 +297,46 @@ export const posts = [
                     upvotedBy: [],
                     downvotedBy: [],
                 },
+                createdAt: '2022-03-03',
+            },
+        ],
+        createdAt: '2022-03-03',
+        updatedAt: formatDate(),
+    },
+    {
+        _id: uuid(),
+        content: 'This is cool',
+        likes: {
+            likeCount: 0,
+            likedBy: [],
+            dislikedBy: [],
+        },
+        username: 'himadrishah',
+
+        comments: [
+            {
+                _id: uuid(),
+                firstName: 'Shubham',
+                lastName: 'Soni',
+                username: 'shubhamsoni',
+                text: 'Interesting',
+                votes: {
+                    upvotedBy: [],
+                    downvotedBy: [],
+                },
+                createdAt: '2022-01-11',
+            },
+            {
+                _id: uuid(),
+                firstName: 'Soham',
+                lastName: 'Shah',
+                username: 'sohamshah',
+                text: 'Wow!',
+                votes: {
+                    upvotedBy: [],
+                    downvotedBy: [],
+                },
+                createdAt: '2022-01-11',
             },
         ],
         createdAt: '2022-01-11',

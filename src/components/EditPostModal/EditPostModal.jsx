@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { editPostHelper } from '../../features/posts/postSlice';
 
-const EditPostModal = ({ postData, setEditModal, token }) => {
+const EditPostModal = ({ postData, setEditModal, token, userAvatar }) => {
     const dispatch = useDispatch();
     const [postContent, setPostContent] = useState({
         content: postData?.content,
@@ -22,9 +22,9 @@ const EditPostModal = ({ postData, setEditModal, token }) => {
             >
                 <div className="top flex">
                     <img
-                        src="https://i.pravatar.cc/50"
+                        src={userAvatar}
                         alt="profile-asset"
-                        className="rounded-full"
+                        className="rounded-full h-12 w-12"
                     />
                     <input
                         type="text"

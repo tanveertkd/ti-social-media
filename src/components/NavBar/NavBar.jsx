@@ -1,11 +1,14 @@
 import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { logout } from '../../features/auth/authSlice';
 import { setSearchedUser } from '../../features/user/userSlice';
+import { debounceUtil } from '../../utils';
+import { SearchModal } from '../SearchModal/SearchModal';
 
 const NavBar = () => {
     const dispatch = useDispatch();
+
     const [searchInput, setSearchInput] = useState({
         searchedUser: '',
     });
@@ -46,9 +49,14 @@ const NavBar = () => {
                                 type="text"
                                 placeholder="Looking for someone?"
                                 name="nav-search"
-                                onChange={(e) => {
-                                    setSearchInput({ searchedUser: e.target.value });
-                                }}
+                                onChange={debounceUtil(
+                                    (e) => {
+                                        setSearchInput({ searchedUser: e.target.value });
+                                        dispatch(setSearchedUser(e.target.value));
+                                    },
+
+                                    300,
+                                )}
                                 onKeyDown={(e) => {
                                     if (e.key === 'Enter') {
                                         handleSearch();
@@ -56,11 +64,12 @@ const NavBar = () => {
                                 }}
                             />
                             <i
-                                className="far fa-search nav-main-middle-icn hover:cursor-pointer absolute ml-[-20px] xs:mt-3 md:mt-1.5"
+                                className="far fa-search nav-main-middle-icn hover:cursor-pointer absolute ml-[-25px] xs:mt-3 md:mt-1.5"
                                 onClick={() => handleSearch()}
                             ></i>
                         </label>
                     </li>
+                    <div>{searchInput.searchedUser.length > 0 && <SearchModal />}</div>
                 </ul>
 
                 {/* Nav right */}

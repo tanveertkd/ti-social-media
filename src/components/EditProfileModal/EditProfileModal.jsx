@@ -9,11 +9,10 @@ const EditProfileModal = ({ setModal, currentUser }) => {
 
     const dispatch = useDispatch();
     const { token } = useSelector((state) => state.auth);
-    const { firstName, lastName, email, bio, site } = currentUser;
+    const { firstName, lastName, bio, site } = currentUser;
     const [userInput, setUserInput] = useState({
         firstName: firstName,
         lastName: lastName,
-        email: '',
         bio: bio,
         site: site,
     });
@@ -66,7 +65,7 @@ const EditProfileModal = ({ setModal, currentUser }) => {
                 <div className="form-input my-4 flex flex-col items-center">
                     <label className="avatar relative w-max cursor-pointer mx-auto my-2">
                         <img
-                            src={avatar ? URL.createObjectURL(avatar) : 'https://i.pravatar.cc/200'}
+                            src={avatar ? URL.createObjectURL(avatar) : currentUser?.avatarUrl}
                             alt="profile-avatar"
                             className="rounded-full w-[200px]"
                         />
@@ -119,27 +118,6 @@ const EditProfileModal = ({ setModal, currentUser }) => {
                             setUserInput({
                                 ...userInput,
                                 lastName: event.target.value,
-                            })
-                        }
-                    />
-                </div>
-
-                <div className="form-input my-4 flex flex-col">
-                    <label htmlFor="login-email" className="input-label text-left text-base">
-                        {' '}
-                        Email:{' '}
-                    </label>
-                    <input
-                        type="text"
-                        required
-                        placeholder="Enter your email address"
-                        name="login-email"
-                        className="login-email input-form border-[1px] border-color-grey rounded p-[2px]"
-                        value={userInput.email === '' ? email : userInput.email}
-                        onChange={(event) =>
-                            setUserInput({
-                                ...userInput,
-                                email: event.target.value,
                             })
                         }
                     />
