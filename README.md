@@ -20,6 +20,7 @@ TI social is a social media app built using ReactJS, Redux, Tailwind CSS and moc
     2. Follow user
     3. Unfollow user
     4. Edit user
+    5. Search user
 4. User home feed
     1. Sort posts by:
         - Trending
