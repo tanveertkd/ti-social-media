@@ -155,7 +155,7 @@ const Profile = () => {
                                     </div>
                                 ) : (
                                     <div>
-                                        {userPost?.map((post) => (
+                                        {[...userPost].reverse()?.map((post) => (
                                             <Post
                                                 key={post?._id}
                                                 postData={post}

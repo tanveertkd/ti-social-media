@@ -11,6 +11,9 @@ const loginHelper = createAsyncThunk(
             toast.success('Welcome!');
             return response;
         } catch (error) {
+            if(error.response.status === 404) {
+                toast.error('Could not find username.')
+            }
             return rejectWithValue(error.response.data);
         }
     },
@@ -21,7 +24,6 @@ const signupHelper = createAsyncThunk(
     async ( userInput , { rejectWithValue }) => {
         try {
             const response = await signUpService(userInput);
-            toast.success('Welcome to TI!');
             return response;
         } catch (error) {
             return rejectWithValue(error.response.data);

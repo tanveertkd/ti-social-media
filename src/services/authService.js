@@ -1,4 +1,5 @@
 import axios from "axios";
+import toast from "react-hot-toast";
 
 const loginService = async (username, password) => {
     const response = await axios.post("/api/auth/login", {
@@ -19,10 +20,15 @@ const signUpService = async (userInput) => {
             username,
             password,
         });
-        if(response.status === 201)
+        if(response.status === 201) {
+            toast.success('Welcome to TI!');
             return response.data;
+        }
     } catch(error) {
-        console.log("Couldn't create user.", error);
+        if(error.response.status === 422) {
+            toast.error('Sorry, this username is already taken.');
+        }
+        console.log("Could not create user.", error);
     }
 };
 
