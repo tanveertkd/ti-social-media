@@ -18,16 +18,16 @@ const SideBarRight = () => {
 
     const currentUserData = users.find((user) => user.username === username);
     const suggestedUsers = users.filter((user) => user.username !== username);
-
+    
     // Will use this if I decide to remove users from list after following
-    const filteredSuggestedUsers = users
-        ?.filter((user) => user.username !== currentUserData.username)
-        ?.filter(
-            (user) =>
-                !currentUserData?.following.find(
-                    (followedUser) => followedUser.username === user.username,
-                ),
-        );
+    // const filteredSuggestedUsers = users
+    //     ?.filter((user) => user.username !== currentUserData.username)
+    //     ?.filter(
+    //         (user) =>
+    //             !currentUserData?.following.find(
+    //                 (followedUser) => followedUser.username === user.username,
+    //             ),
+    //     );
 
     useEffect(() => {
         dispatch(dispatch(() => getAllUsersHelper()));

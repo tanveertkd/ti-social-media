@@ -55,7 +55,7 @@ const NavBar = () => {
                                         dispatch(setSearchedUser(e.target.value));
                                     },
 
-                                    300,
+                                    500,
                                 )}
                                 onKeyDown={(e) => {
                                     if (e.key === 'Enter') {

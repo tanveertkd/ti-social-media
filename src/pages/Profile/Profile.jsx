@@ -18,6 +18,9 @@ import {
 } from '../../features/user/userSlice';
 
 const Profile = () => {
+    const DEFAULT_PROFILE_AVATAR =
+        'https://res.cloudinary.com/ddroedz3j/image/upload/v1652917031/ti_social/johndoe_pb37ox.png';
+
     const { username } = useParams();
 
     const { currentUser, token } = useSelector((state) => state.auth);
@@ -32,7 +35,7 @@ const Profile = () => {
         dispatch(getAllUsersHelper());
         dispatch(getUsersPost(username));
     }, [dispatch, username]);
-
+    
     return (
         <div className="flex flex-col h-screen">
             <div className="navbar fixed top-0 right-0 left-0 bg-primary-bg z-10">
@@ -48,7 +51,12 @@ const Profile = () => {
                         <div className="md:w-2/3 md:mr-4 lg:w-3/4 xl:w-11/12">
                             <div className="flex justify-center">
                                 <img
-                                    src={currentLoggedUser?.avatarUrl}
+                                    src={
+                                        currentLoggedUser?.avatarUrl === undefined ||
+                                        currentLoggedUser?.avatarUrl === ''
+                                            ? DEFAULT_PROFILE_AVATAR
+                                            : currentLoggedUser?.avatarUrl
+                                    }
                                     alt="profile-avatar"
                                     className="rounded-full w-[200px]"
                                 />

@@ -12,7 +12,7 @@ export const users = [
     lastName: "Hazarika",
     username: "tanveerhazarika",
     password: "test123",
-    avatarUrl: "https://res.cloudinary.com/ddroedz3j/image/upload/v1652917031/ti_social/johndoe_pb37ox.png",
+    avatarUrl: "https://res.cloudinary.com/ddroedz3j/image/upload/v1652913261/ti_social/tjibrgteb7zwgbemjr4v.jpg",
     bio: "Hi!",
     site: "https://tanveerswebsite.netlify.app",
     followers: [
@@ -21,7 +21,7 @@ export const users = [
         firstName: "Nikhil",
         lastName: "Belide",
         username: "belidenikhil",
-        avatarUrl: "https://res.cloudinary.com/ddroedz3j/image/upload/v1652913261/ti_social/tjibrgteb7zwgbemjr4v.jpg",
+        avatarUrl: "https://res.cloudinary.com/ddroedz3j/image/upload/v1652917031/ti_social/johndoe_pb37ox.png",
       },
       {
         _id: uuid(),
@@ -44,7 +44,7 @@ export const users = [
         firstName: "Nikhil",
         lastName: "Belide",
         username: "belidenikhil",
-        avatarUrl: "https://res.cloudinary.com/ddroedz3j/image/upload/v1652913261/ti_social/tjibrgteb7zwgbemjr4v.jpg",
+        avatarUrl: "https://res.cloudinary.com/ddroedz3j/image/upload/v1652917031/ti_social/johndoe_pb37ox.png",
       },
     ],
     createdAt: formatDate(),
@@ -56,7 +56,7 @@ export const users = [
     lastName: "Belide",
     username: "belidenikhil",
     password: "test123",
-    avatarUrl: "https://res.cloudinary.com/ddroedz3j/image/upload/v1652913261/ti_social/tjibrgteb7zwgbemjr4v.jpg",
+    avatarUrl: "https://res.cloudinary.com/ddroedz3j/image/upload/v1652917031/ti_social/johndoe_pb37ox.png",
     bio: "I am everywhere yet, no one knows who I am.",
     site: "https://doefamily.com",
     followers: [

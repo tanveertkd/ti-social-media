@@ -19,7 +19,6 @@ const loginHelper = createAsyncThunk(
 const signupHelper = createAsyncThunk(
     'auth/signupHelper',
     async ( userInput , { rejectWithValue }) => {
-        console.log('userInput', userInput)
         try {
             const response = await signUpService(userInput);
             toast.success('Welcome to TI!');
@@ -55,7 +54,6 @@ const authSlice = createSlice({
         },
 
         [loginHelper.fulfilled]: (state, { payload }) => {
-            console.log(payload.foundUser)
             state.currentUser = payload.foundUser;
             state.token = payload.encodedToken;
             state.isAuthLoading = false;

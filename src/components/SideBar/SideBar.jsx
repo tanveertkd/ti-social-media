@@ -6,6 +6,9 @@ const active = {
 };
 
 const SideBar = () => {
+    const DEFAULT_PROFILE_AVATAR =
+        'https://res.cloudinary.com/ddroedz3j/image/upload/v1652917031/ti_social/johndoe_pb37ox.png';
+
     const {
         currentUser: { username, firstName, lastName },
     } = useSelector((state) => state.auth);
@@ -66,7 +69,12 @@ const SideBar = () => {
                     <Link to={`/profile/${username}`} className="flex items-center">
                         <div className="w-[48px] mr-2">
                             <img
-                                src={currentUser?.avatarUrl}
+                                src={
+                                    currentUser?.avatarUrl === undefined ||
+                                    currentUser.avatarUrl === ''
+                                        ? DEFAULT_PROFILE_AVATAR
+                                        : currentUser?.avatarUrl
+                                }
                                 alt={currentUser?.username}
                                 className="rounded-full border-[2px] border-color-alert-success"
                             />
