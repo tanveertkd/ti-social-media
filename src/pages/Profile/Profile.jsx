@@ -35,7 +35,7 @@ const Profile = () => {
         dispatch(getAllUsersHelper());
         dispatch(getUsersPost(username));
     }, [dispatch, username]);
-    
+
     return (
         <div className="flex flex-col h-screen">
             <div className="navbar fixed top-0 right-0 left-0 bg-primary-bg z-10">
@@ -148,21 +148,36 @@ const Profile = () => {
                             </div>
 
                             <div className="posts py-4 text-left">
-                                <p className="text-xl">Your Posts</p>
+                                {userPost?.length > 0 && (
+                                    <p className="text-xl">
+                                        {currentUser?.username === currentLoggedUser?.username
+                                            ? 'Your Posts'
+                                            : 'Posts'}
+                                    </p>
+                                )}
+
                                 {isLoading ? (
                                     <div className="flex justify-center items-center h-max">
                                         <Loader />
                                     </div>
                                 ) : (
                                     <div>
-                                        {[...userPost].reverse()?.map((post) => (
-                                            <Post
-                                                key={post?._id}
-                                                postData={post}
-                                                firstName={currentLoggedUser?.firstName}
-                                                lastName={currentLoggedUser?.lastName}
-                                            />
-                                        ))}
+                                        {userPost?.length > 0 ? (
+                                            [...userPost]
+                                                .reverse()
+                                                ?.map((post) => (
+                                                    <Post
+                                                        key={post?._id}
+                                                        postData={post}
+                                                        firstName={currentLoggedUser?.firstName}
+                                                        lastName={currentLoggedUser?.lastName}
+                                                    />
+                                                ))
+                                        ) : (
+                                            <div className="flex justify-center">
+                                                Hmm, seems empty in here.
+                                            </div>
+                                        )}
                                     </div>
                                 )}
                             </div>

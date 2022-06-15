@@ -105,7 +105,6 @@ const getPostCommentsHelper = createAsyncThunk(
 const addCommentsHelper = createAsyncThunk(
     'posts/getPostCommentsHelper',
     async ({ postId, userInput, token }, { rejectWithValue }) => {
-        console.log(postId, userInput, token)
         try {
             const response = await addCommentService(postId, userInput, token);
             return response;
