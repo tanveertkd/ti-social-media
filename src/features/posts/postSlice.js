@@ -105,7 +105,6 @@ const getPostCommentsHelper = createAsyncThunk(
 const addCommentsHelper = createAsyncThunk(
     'posts/getPostCommentsHelper',
     async ({ postId, userInput, token }, { rejectWithValue }) => {
-        console.log(postId, userInput, token)
         try {
             const response = await addCommentService(postId, userInput, token);
             return response;
@@ -120,7 +119,6 @@ const getAllBookmarksHelper = createAsyncThunk(
     async ({ token }, { rejectWithValue }) => {
         try {
             const response = await getAllBookmarksService(token);
-            console.log('helper', response);
             return response;
         } catch (error) {
             return rejectWithValue(error.response.data);

@@ -11,6 +11,9 @@ const loginHelper = createAsyncThunk(
             toast.success('Welcome!');
             return response;
         } catch (error) {
+            if(error.response.status === 404) {
+                toast.error('Could not find username.')
+            }
             return rejectWithValue(error.response.data);
         }
     },
@@ -19,10 +22,8 @@ const loginHelper = createAsyncThunk(
 const signupHelper = createAsyncThunk(
     'auth/signupHelper',
     async ( userInput , { rejectWithValue }) => {
-        console.log('userInput', userInput)
         try {
             const response = await signUpService(userInput);
-            toast.success('Welcome to TI!');
             return response;
         } catch (error) {
             return rejectWithValue(error.response.data);
@@ -55,7 +56,6 @@ const authSlice = createSlice({
         },
 
         [loginHelper.fulfilled]: (state, { payload }) => {
-            console.log(payload.foundUser)
             state.currentUser = payload.foundUser;
             state.token = payload.encodedToken;
             state.isAuthLoading = false;

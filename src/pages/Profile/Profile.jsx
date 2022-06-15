@@ -18,6 +18,9 @@ import {
 } from '../../features/user/userSlice';
 
 const Profile = () => {
+    const DEFAULT_PROFILE_AVATAR =
+        'https://res.cloudinary.com/ddroedz3j/image/upload/v1652917031/ti_social/johndoe_pb37ox.png';
+
     const { username } = useParams();
 
     const { currentUser, token } = useSelector((state) => state.auth);
@@ -48,7 +51,12 @@ const Profile = () => {
                         <div className="md:w-2/3 md:mr-4 lg:w-3/4 xl:w-11/12">
                             <div className="flex justify-center">
                                 <img
-                                    src={currentLoggedUser?.avatarUrl}
+                                    src={
+                                        currentLoggedUser?.avatarUrl === undefined ||
+                                        currentLoggedUser?.avatarUrl === ''
+                                            ? DEFAULT_PROFILE_AVATAR
+                                            : currentLoggedUser?.avatarUrl
+                                    }
                                     alt="profile-avatar"
                                     className="rounded-full w-[200px]"
                                 />
@@ -140,21 +148,36 @@ const Profile = () => {
                             </div>
 
                             <div className="posts py-4 text-left">
-                                <p className="text-xl">Your Posts</p>
+                                {userPost?.length > 0 && (
+                                    <p className="text-xl">
+                                        {currentUser?.username === currentLoggedUser?.username
+                                            ? 'Your Posts'
+                                            : 'Posts'}
+                                    </p>
+                                )}
+
                                 {isLoading ? (
                                     <div className="flex justify-center items-center h-max">
                                         <Loader />
                                     </div>
                                 ) : (
                                     <div>
-                                        {userPost?.map((post) => (
-                                            <Post
-                                                key={post?._id}
-                                                postData={post}
-                                                firstName={currentLoggedUser?.firstName}
-                                                lastName={currentLoggedUser?.lastName}
-                                            />
-                                        ))}
+                                        {userPost?.length > 0 ? (
+                                            [...userPost]
+                                                .reverse()
+                                                ?.map((post) => (
+                                                    <Post
+                                                        key={post?._id}
+                                                        postData={post}
+                                                        firstName={currentLoggedUser?.firstName}
+                                                        lastName={currentLoggedUser?.lastName}
+                                                    />
+                                                ))
+                                        ) : (
+                                            <div className="flex justify-center">
+                                                Hmm, seems empty in here.
+                                            </div>
+                                        )}
                                     </div>
                                 )}
                             </div>

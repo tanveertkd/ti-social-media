@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
 import { loginHelper } from '../../features/auth/authSlice';
 import { useAuth } from '../../hooks/useAuth';
 
@@ -34,7 +33,7 @@ const Login = () => {
             <div className="login w-full flex flex-col justify-center items-center">
                 <p className="login-header text-3xl">Sign In</p>
 
-                <form className="login-input-form w-10/12">
+                <form className="login-input-form w-10/12" onSubmit={handlelogin}>
                     <div className="form-input my-4 flex flex-col">
                         <label htmlFor="login-username" className="input-label text-left text-lg">
                             Username:
@@ -67,7 +66,7 @@ const Login = () => {
                         />
                     </div>
 
-                    <div className="form-input checkbox-reset flex justify-between">
+                    {/* <div className="form-input checkbox-reset flex justify-between">
                         <div>
                             <input type="checkbox" name="form-checkbox" className="form-checkbox" />
                             <label htmlFor="form-checkbox" className="checkbox-label">
@@ -79,16 +78,13 @@ const Login = () => {
                                 Forgot Passsword?
                             </Link>
                         </div>
-                    </div>
+                    </div> */}
                     <div className="form-submit-btn">
-                        <button
-                            className="btn form-btn bg-color-grey text-primary-bg w-full p-1.5 border-[1px] border-color-grey rounded my-4 hover:bg-color-hover-grey"
-                            onClick={(e) => handlelogin(e, userInput)}
-                        >
+                        <button className="btn form-btn bg-color-grey text-primary-bg w-full p-1.5 border-[1px] border-color-grey rounded my-4 hover:bg-color-hover-grey transition-all ease-in delay-75 active:scale-95">
                             Sign In
                         </button>
                         <button
-                            className="btn form-btn bg-color-grey text-primary-bg w-full p-1.5 border-[1px] border-color-grey rounded mb-4 hover:bg-color-hover-grey"
+                            className="btn form-btn bg-color-grey text-primary-bg w-full p-1.5 border-[1px] border-color-grey rounded mb-4 hover:bg-color-hover-grey transition-all ease-in delay-75 active:scale-95"
                             onClick={(e) => handleGuest(e, userInput)}
                         >
                             Sign In as Guest
@@ -97,8 +93,8 @@ const Login = () => {
                 </form>
 
                 <button
-                    onClick={() => toggleUser()}
-                    className="btn signup-cta text-color-grey bg-primary-bg p-1.5 border-[1px] border-color-grey rounded hover:bg-color-grey hover:text-primary-bg"
+                    onClick={toggleUser}
+                    className="btn signup-cta text-color-grey bg-primary-bg p-1.5 border-[1px] border-color-grey rounded hover:bg-color-grey hover:text-primary-bg transition-all ease-in delay-75 active:scale-95"
                 >
                     Sign Up &#8594;
                 </button>

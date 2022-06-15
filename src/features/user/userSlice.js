@@ -40,7 +40,6 @@ const editUserHelper = createAsyncThunk(
     async ({ userInput, token }, { rejectWithValue }) => {
         try {
             const response = await editUserService(userInput, token);
-            console.log('users/editUserHelper', response);
             return response;
         } catch (error) {
             console.log('users/editUserHelper', error);

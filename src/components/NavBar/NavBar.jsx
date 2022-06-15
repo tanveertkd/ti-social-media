@@ -30,7 +30,7 @@ const NavBar = () => {
                             TI <span className="text-color-highlight-orange">Social</span>
                         </Link>
                     </li>
-                    <li className="nav-main-li xs:flex md:hidden border-[1px] rounded border-color-grey px-2 hover:bg-color-highlight-orange hover:text-primary-bg hover:border-color-highlight-orange hover:shadow hover:shadow-orange-600">
+                    <li className="nav-main-li xs:flex md:hidden border-[1px] rounded text-primary-bg bg-color-grey shadow-lg border-color-grey px-2 hover:bg-color-highlight-orange hover:text-primary-bg hover:border-color-highlight-orange hover:shadow hover:shadow-orange-600">
                         <button
                             onClick={() => dispatch(logout())}
                             className="nav-main-item nav-btn-login"
@@ -55,7 +55,7 @@ const NavBar = () => {
                                         dispatch(setSearchedUser(e.target.value));
                                     },
 
-                                    300,
+                                    500,
                                 )}
                                 onKeyDown={(e) => {
                                     if (e.key === 'Enter') {
@@ -74,7 +74,7 @@ const NavBar = () => {
 
                 {/* Nav right */}
                 <ul className="hidden nav-main-right nav-main-ul md:flex hover:cursor-pointer">
-                    <li className="nav-main-li border-[1px] rounded border-color-grey px-2 hover:bg-color-highlight-orange hover:text-primary-bg hover:border-color-highlight-orange hover:shadow hover:shadow-orange-600">
+                    <li className="nav-main-li border-[1px] text-primary-bg bg-color-grey rounded shadow-lg border-color-grey px-2 hover:bg-color-highlight-orange hover:text-primary-bg hover:border-color-highlight-orange hover:shadow hover:shadow-orange-600">
                         <button
                             onClick={() => dispatch(logout())}
                             className="nav-main-item nav-btn-login"

@@ -13,9 +13,11 @@ const Signup = () => {
         email: '',
         username: '',
         password: '',
+        avatarUrl: 'https://res.cloudinary.com/ddroedz3j/image/upload/v1652917031/ti_social/johndoe_pb37ox.png',
+        bio: 'Hi!'
     });
 
-    const signUpHandler = (e, userInput) => {
+    const signUpHandler = (e) => {
         e.preventDefault();
         dispatch(signupHelper(userInput));
     }
@@ -27,10 +29,10 @@ const Signup = () => {
 
                 <form
                     className="login-input-form w-10/12"
-                    onSubmit={(event) => signUpHandler(event, userInput)}
+                    onSubmit={(event) => signUpHandler(event)}
                 >
                     <div className="form-input my-4 flex flex-col">
-                        <label for="login-firstName" className="input-label text-left text-lg">
+                        <label htmlFor="login-firstName" className="input-label text-left text-lg">
                             {' '}
                             First Name:{' '}
                         </label>
@@ -47,7 +49,7 @@ const Signup = () => {
                     </div>
 
                     <div className="form-input my-4 flex flex-col">
-                        <label for="login-lastName" className="input-label text-left text-lg">
+                        <label htmlFor="login-lastName" className="input-label text-left text-lg">
                             {' '}
                             Last Name:{' '}
                         </label>
@@ -64,7 +66,7 @@ const Signup = () => {
                     </div>
 
                     <div className="form-input my-4 flex flex-col">
-                        <label for="login-email" className="input-label text-left text-lg">
+                        <label htmlFor="login-email" className="input-label text-left text-lg">
                             {' '}
                             Email:{' '}
                         </label>
@@ -97,7 +99,7 @@ const Signup = () => {
                     </div>
 
                     <div className="form-input my-4 flex flex-col">
-                        <label for="login-password" className="input-label text-left text-lg">
+                        <label htmlFor="login-password" className="input-label text-left text-lg">
                             {' '}
                             Passsword:{' '}
                         </label>
@@ -115,8 +117,8 @@ const Signup = () => {
 
                     <div className="form-input checkbox-reset">
                         <div>
-                            <input type="checkbox" name="form-checkbox" className="form-checkbox" />
-                            <label for="form-checkbox" className="checkbox-label">
+                            <input type="checkbox" name="form-checkbox" className="form-checkbox" required/>
+                            <label htmlFor="form-checkbox" className="checkbox-label">
                                 {' '}
                                 I accept all Terms & Conditions{' '}
                             </label>
@@ -133,7 +135,7 @@ const Signup = () => {
                 </form>
 
                 <div className="sign-up text-color-grey bg-primary-bg p-1.5 border-[1px] border-color-grey rounded hover:bg-color-grey hover:text-primary-bg">
-                    <button onClick={() => toggleUser()} className="btn signup-cta">
+                    <button onClick={toggleUser} className="btn signup-cta">
                         I already have an account &#8594;
                     </button>
                 </div>
