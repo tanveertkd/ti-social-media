@@ -90,7 +90,9 @@ const Post = ({ postData }) => {
                     ) : null}
                 </div>
             </div>
-            <li className="list-none text-left py-2">{postData?.content}</li>
+            <Link to={`/post/${postData?._id}`}>
+                <li className="list-none text-left py-2">{postData?.content}</li>
+            </Link>
             <li className="list-none flex justify-around pb-2">
                 <div>
                     {!isPostAlreadyLiked(currentPost, currentUser?.username) ? (
