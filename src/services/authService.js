@@ -10,7 +10,7 @@ const loginService = async (username, password) => {
 };
 
 const signUpService = async (userInput) => {
-    const { firstName, lastName, email, username, password } = userInput;
+    const { firstName, lastName, email, username, password, avatarUrl, bio } = userInput;
     
     try{
         const response = await axios.post('/api/auth/signup', {
@@ -19,6 +19,8 @@ const signUpService = async (userInput) => {
             email,
             username,
             password,
+            avatarUrl,
+            bio
         });
         if(response.status === 201) {
             toast.success('Welcome to TI!');
